@@ -17,6 +17,7 @@
   top: 0;
   z-index: 100;
   padding: var(--yuanhhou-spacing-400) var(--yuanhhou-spacing-400);
+  position: relative;
 }
 
 .navContainer {
@@ -47,6 +48,25 @@
   display: flex;
   align-items: center;
   height: var(--yuanhhou-spacing-500, 40px);
+}
+
+/* tappable logo button */
+.logoButton {
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
+  font: inherit;
+  color: inherit;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+}
+
+.logoButton:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-small);
 }
 
 /* Navigation Links */
@@ -122,6 +142,26 @@
   border-radius: var(--radius-small);
 }
 
+/* Make link focus visible across browsers */
+.navLinks a:focus {
+  outline: none;
+}
+.navLinks a:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
+  border-radius: var(--radius-small);
+}
+
+/* Icon sizing uses token values */
+.hamburger .icon,
+.hamburger svg {
+  width: var(--yuanhhou-size-300, 24px);
+  height: var(--yuanhhou-size-300, 24px);
+  display: inline-block;
+  vertical-align: middle;
+  color: inherit;
+}
+
 /* Mobile Responsive */
 @media (max-width: 768px) {
   .navbar {
@@ -138,13 +178,14 @@
     justify-content: space-between;
   }
 
+
   .hamburger {
     display: flex;
   }
 
   .navLinks {
     position: absolute;
-    top: var(--yuanhhou-spacing-500);
+    top: 100%;
     left: 0;
     right: 0;
     flex-direction: column;
@@ -156,6 +197,7 @@
     justify-content: flex-start;
     padding: 0;
     z-index: 100;
+    box-shadow: 0 6px 16px rgba(0,0,0,0.08);
   }
 
   .navLinks.active {
@@ -172,6 +214,8 @@
     display: block;
   }
 
+
+    
   .divider {
     display: none;
   }

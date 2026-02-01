@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import { useTranslation } from 'react-i18next'
-import { List, X } from '@phosphor-icons/react'
+// using inline SVGs for hamburger/close icons (no external icon lib)
 import { ChipGroup } from '../UIComponents/Chip'
 import { Dialog } from '../UIComponents/Dialog/Dialog'
 import { Button } from '../UIComponents/Button/Button'
@@ -15,7 +15,7 @@ const ONBOARDING_KEY = 'portfolio-onboarding-complete'
 
 export const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation()
-  const { theme } = useTheme()
+  useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentView, setCurrentView] = useState<'home' | 'work' | 'settings'>('home')
   const [selectedLanguage, setSelectedLanguage] = useState<(string | number)[]>([i18n.language])
@@ -67,24 +67,27 @@ export const Portfolio: React.FC = () => {
       <nav className={styles.navbar}>
         <div className={styles.navContainer}>
           <div className={styles.navInner}>
-            {/* Logo */}
+            {/* Logo (tappable to return home) */}
             <div className={styles.logo}>
-              <span>{t('portfolio.logo')}</span>
+              <button
+                className={styles.logoButton}
+                onClick={() => { setCurrentView('home'); setIsMenuOpen(false); }}
+                aria-label={t('portfolio.logo')}
+              >
+                <span>{t('portfolio.logo')}</span>
+              </button>
             </div>
 
             {/* Nav Links */}
-            <ul className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-              <li>
-                <a href="#home" onClick={() => setCurrentView('home')}>{t('portfolio.nav.home')}</a>
-              </li>
+            <ul id="primary-navigation" className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
               <li>
                 <a href="#about">{t('portfolio.nav.about')}</a>
               </li>
               <li>
-                <a href="#work" onClick={() => setCurrentView('work')} className={currentView === 'work' ? styles.active : ''}>{t('portfolio.nav.work')}</a>
+                <a href="#work" onClick={() => { setCurrentView('work'); setIsMenuOpen(false); }} className={currentView === 'work' ? styles.active : ''}>{t('portfolio.nav.work')}</a>
               </li>
               <li>
-                <a href="#settings" onClick={() => setCurrentView('settings')} className={currentView === 'settings' ? styles.active : ''}>{t('portfolio.nav.settings')}</a>
+                <a href="#settings" onClick={() => { setCurrentView('settings'); setIsMenuOpen(false); }} className={currentView === 'settings' ? styles.active : ''}>{t('portfolio.nav.settings')}</a>
               </li>
             </ul>
 
@@ -94,13 +97,21 @@ export const Portfolio: React.FC = () => {
               onClick={() => setIsMenuOpen(!isMenuOpen)}
               aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
               aria-expanded={isMenuOpen}
+              aria-controls="primary-navigation"
             >
-              {isMenuOpen ? <X size={24} weight="bold" /> : <List size={24} weight="bold" />}
+              {isMenuOpen ? (
+                <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M18.3 5.71a1 1 0 0 0-1.41 0L12 10.59 7.11 5.7A1 1 0 0 0 5.7 7.11L10.59 12l-4.89 4.89a1 1 0 1 0 1.41 1.41L12 13.41l4.89 4.89a1 1 0 0 0 1.41-1.41L13.41 12l4.89-4.89a1 1 0 0 0 0-1.4z" fill="currentColor" />
+                </svg>
+              ) : (
+                <svg className={styles.icon} viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+                  <path d="M3 6h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2zm18 5H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2zm0 7H3a1 1 0 0 0 0 2h18a1 1 0 0 0 0-2z" fill="currentColor" />
+                </svg>
+              )}
             </button>
           </div>
         </div>
       </nav>
-
       {/* Hero Section */}
       <main className={styles.main}>
         {currentView === 'home' ? (
