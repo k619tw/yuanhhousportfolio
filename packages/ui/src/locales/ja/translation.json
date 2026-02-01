@@ -156,7 +156,10 @@
       "language": "言語",
       "languageHint": "ご希望の言語を選択してください",
       "theme": "テーマ",
-      "themeHint": "気分に合わせてテーマを選んでください"
+      "themeHint": "気分に合わせてテーマを選んでください",
+      "accessibility": "アクセシビリティ",
+      "enhancedContrast": "コントラスト強化",
+      "enhancedContrastHint": "テキストの不透明度と色のコントラストを高めて、より良い読みやすさを提供します"
     },
     "work": {
       "title": "作品",

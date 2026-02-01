@@ -46,6 +46,7 @@ export const Portfolio: React.FC = () => {
 
   const [heroFilterSelected, setHeroFilterSelected] = useState<(string | number)[]>([])
   const [heroToggle, setHeroToggle] = useState(false)
+  const [enhancedContrast, setEnhancedContrast] = useState(false)
 
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true')
@@ -62,7 +63,7 @@ export const Portfolio: React.FC = () => {
   const onboardingTitle = t(`portfolio.onboarding.greeting.${getTimeOfDay()}`)
 
   return (
-    <div className={styles.portfolio}>
+    <div className={`${styles.portfolio} ${enhancedContrast ? styles.enhancedContrast : ''}`}>
       {/* Navigation Bar */}
       <nav className={styles.navbar}>
         <div className={styles.navContainer}>
@@ -242,6 +243,17 @@ export const Portfolio: React.FC = () => {
                 <label className={styles.settingLabel}>{t('portfolio.settings.theme')}</label>
                 <ThemeSelector />
                 <p className={styles.settingHint}>{t('portfolio.settings.themeHint')}</p>
+              </div>
+
+              {/* Accessibility - Enhanced Contrast */}
+              <div className={styles.settingGroup}>
+                <label className={styles.settingLabel}>{t('portfolio.settings.accessibility')}</label>
+                <Toggle
+                  checked={enhancedContrast}
+                  onChange={(v) => setEnhancedContrast(v)}
+                  label={t('portfolio.settings.enhancedContrast')}
+                />
+                <p className={styles.settingHint}>{t('portfolio.settings.enhancedContrastHint')}</p>
               </div>
             </section>
           </div>

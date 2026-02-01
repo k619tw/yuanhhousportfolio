@@ -162,7 +162,10 @@
       "language": "語言",
       "languageHint": "選擇您偏好的語言",
       "theme": "主題",
-      "themeHint": "選擇符合您心情的主題"
+      "themeHint": "選擇符合您心情的主題",
+      "accessibility": "無障礙功能",
+      "enhancedContrast": "增強對比度",
+      "enhancedContrastHint": "提高文字不透明度與色彩對比，改善可讀性"
     },
     "work": {
       "title": "作品",

@@ -156,7 +156,10 @@
       "language": "Language",
       "languageHint": "Choose your preferred language",
       "theme": "Theme",
-      "themeHint": "Pick a theme that matches your mood"
+      "themeHint": "Pick a theme that matches your mood",
+      "accessibility": "Accessibility",
+      "enhancedContrast": "Enhanced Contrast",
+      "enhancedContrastHint": "Increases text opacity and color contrast for better readability"
     },
     "work": {
       "title": "Work",
