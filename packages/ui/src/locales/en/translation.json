@@ -165,7 +165,7 @@
       "title": "Work",
       "card1": {
         "title": "Portfolio UI Components",
-        "body": "A comprehensive design system built in Visual Studio Code using Figma MCP and Claude AI. From establishing UI foundations to defining design primitives, semantic tokens, and spacing systems—explore how AI-assisted development streamlines design system architecture. Features intelligent colour systems, typography scales, and accessibility-first components built with modern design tokens.",
+        "body": "I established design foundations in Figma — spacing scales, primitives, and semantic tokens — and implemented a multi‑brand token system. Using Figma MCP and Claude AI in VS Code, I rebuilt those foundations in code to create a robust, 1:1 design system that keeps design and code synchronized while producing accessible, reusable components.",
         "link": "View Preview →",
         "badge": "Bonus"
       },
