@@ -6,7 +6,9 @@
   "scripts": {
     "dev": "vite",
     "build": "tsc && vite build",
-    "preview": "vite preview"
+    "build:app": "vite build",
+    "preview": "vite preview",
+    "deploy": "npm run build:app && npx gh-pages -d dist"
   },
   "dependencies": {
     "@phosphor-icons/react": "^2.1.10",
