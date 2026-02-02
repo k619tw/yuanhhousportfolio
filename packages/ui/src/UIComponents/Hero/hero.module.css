@@ -8,7 +8,8 @@
   box-sizing: border-box;
   position: relative;
   z-index: 10;
-  padding-block: 56px;
+  /* use spacing tokens instead of fixed pixel values */
+  padding-block: var(--yuanhhou-spacing-500, 40px);
   padding-inline: var(--yuanhhou-spacing-400, 32px);
   border-radius: var(--radius-medium);
   background: var(--background-secondary);
@@ -39,11 +40,11 @@
 }
 
 .title {
-  /* Use Display MD tokens for heading size and rhythm */
-  font-size: var(--yuanhhou-display-md-font-size);
-  line-height: var(--yuanhhou-display-md-line-height);
-  font-weight: var(--yuanhhou-display-md-font-weight);
-  letter-spacing: var(--yuanhhou-display-md-letter-spacing);
+  /* Use Heading LG tokens for size, line-height, weight and letter-spacing */
+  font-size: var(--yuanhhou-heading-lg-font-size);
+  line-height: var(--yuanhhou-heading-lg-line-height);
+  font-weight: var(--yuanhhou-heading-lg-font-weight);
+  letter-spacing: var(--yuanhhou-heading-lg-letter-spacing);
   color: var(--foreground-primary);
   margin: 0 0 var(--yuanhhou-spacing-300, 24px) 0;
 }
@@ -109,11 +110,11 @@
 
   /* restore desktop line-height variable for headings */
   .title {
-    /* Desktop: use Display MD tokens (larger display scale) */
-    font-size: var(--yuanhhou-display-md-font-size);
-    line-height: var(--yuanhhou-display-md-line-height);
-    font-weight: var(--yuanhhou-display-md-font-weight);
-    letter-spacing: var(--yuanhhou-display-md-letter-spacing);
+    /* Desktop: use Heading LG token set for consistent typography */
+    font-size: var(--yuanhhou-heading-lg-font-size);
+    line-height: var(--yuanhhou-heading-lg-line-height);
+    font-weight: var(--yuanhhou-heading-lg-font-weight);
+    letter-spacing: var(--yuanhhou-heading-lg-letter-spacing);
     margin: 0 0 var(--yuanhhou-spacing-400, 32px) 0;
   }
 
@@ -188,7 +189,9 @@
 /* Reduce vertical padding on very small screens and ensure image is full-bleed width */
 @media (max-width: 599px) {
   .hero {
-    padding-block: 24px;
+    /* preserve a smaller top padding but ensure a 40px bottom padding on very small viewports */
+    padding-block-start: var(--yuanhhou-spacing-300, 24px);
+    padding-block-end: var(--yuanhhou-spacing-500, 40px);
     padding-inline: var(--yuanhhou-spacing-200, 16px);
   }
 
@@ -204,3 +207,14 @@
 }
 
 /* (CTA removed) */
+
+/* Global fallback: some build outputs use hashed classnames for `.hero`.
+   Ensure those generated classes receive token-based bottom padding in production.
+   Targets specific legacy/generated classname and any class containing `_hero_`. */
+:global(._hero_tceyh_2) {
+  padding-bottom: var(--yuanhhou-spacing-500, 40px);
+}
+
+:global([class*="_hero_"]) {
+  padding-bottom: var(--yuanhhou-spacing-500, 40px);
+}

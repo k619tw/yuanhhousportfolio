@@ -293,7 +293,27 @@ body {
   max-width: 1440px;
   margin: 0 auto;
   width: 100%;
-  padding: var(--yuanhhou-spacing-500);
+  padding: 0; /* default: no padding on small viewports; use side margins instead */
+}
+
+/* Mobile: use 16px side margins instead of global padding */
+@media (max-width: 768px) {
+  .grid {
+    margin: 0 16px;
+    max-width: calc(100% - 32px);
+  }
+  .hero {
+    margin-bottom: 400px;
+  }
+}
+
+/* Desktop and larger: restore the spacing-500 padding */
+@media (min-width: 769px) {
+  .grid {
+    padding: var(--yuanhhou-spacing-500);
+    margin: 0 auto;
+    max-width: 1440px;
+  }
 }
 
 /* Hero Section */
@@ -404,7 +424,7 @@ body {
 
 /* ——— WORK VIEW ——— */
 .workSection {
-  padding: var(--yuanhhou-spacing-400) 0;
+  /* layout handled by shared section spacing below */
   overflow: hidden;
 }
 
@@ -413,6 +433,12 @@ body {
   font-weight: var(--yuanhhou-font-weight-700);
   color: var(--foreground-primary);
   margin: 0 0 var(--yuanhhou-spacing-400) 0;
+}
+
+/* Ensure all top-level sections in the grid start at the same vertical position
+   so headings align consistently across views (hero/work/settings). */
+.grid > section {
+  padding-top: var(--yuanhhou-spacing-400);
 }
 
 .workCards {
