@@ -6,10 +6,31 @@
   align-items: stretch;
   width: 100%;
   box-sizing: border-box;
+  position: relative;
+  z-index: 10;
   padding-block: 56px;
   padding-inline: var(--yuanhhou-spacing-400, 32px);
   border-radius: var(--radius-medium);
   background: var(--background-secondary);
+  /* no shadow for flat appearance */
+  box-shadow: none;
+}
+
+/* Brand variant: use brand secondary background and on-secondary text color */
+.hero.brand {
+  background: var(--background-brand-secondary, var(--background-secondary));
+  color: var(--foreground-brand-on-secondary, var(--foreground-primary));
+}
+
+.hero.brand .title,
+.hero.brand .subtitle {
+  /* ensure text uses foreground brand-on-secondary when brand variant is active */
+  color: var(--foreground-brand-on-secondary, var(--foreground-primary));
+}
+
+/* stronger elevation for brand variant so colored background reads as a lifted panel */
+.hero.brand {
+  box-shadow: none;
 }
 
 .text {
@@ -28,8 +49,8 @@
 }
 
 .subtitle {
-  /* Subtitle uses Heading XS font-size only (keep other properties) */
-  font-size: var(--yuanhhou-heading-xs-font-size);
+  /* Subtitle uses Heading SM font-size only (font-size change only) */
+  font-size: var(--yuanhhou-heading-sm-font-size);
   color: var(--foreground-secondary);
   margin: 0;
 }
@@ -46,7 +67,7 @@
   max-width: none;
   height: auto;
   border-radius: var(--radius-medium);
-  box-shadow: 0 8px 24px rgba(16,24,40,0.08);
+  box-shadow: none;
   display: block;
   object-fit: cover;
   object-position: center center;
@@ -136,24 +157,27 @@
 @media (max-width: 899px) {
   .hero {
     gap: var(--yuanhhou-spacing-300, 24px);
-    text-align: center;
+    text-align: left;
   }
 
   .title {
-    /* use heading-sm line-height on mobile */
-    line-height: var(--yuanhhou-line-height-heading-sm);
-    /* remove bottom margin on mobile so heading and subtitle sit closer */
-    margin-bottom: 0;
+    /* remove forced line-height on mobile so browser default applies */
+    line-height: normal;
+    /* restore spacing between heading and subtitle on mobile */
+    margin-bottom: var(--yuanhhou-spacing-300, 24px);
+    text-align: left;
+  }
+
+  /* place image above text on mobile */
+  .media {
+    order: 1;
+    width: 100%;
+    margin-top: 0;
   }
 
   .text {
-    order: 1;
-  }
-
-  .media {
     order: 2;
-    width: 100%;
-    margin-top: var(--yuanhhou-spacing-300, 24px);
+    text-align: left;
   }
 
   .image {

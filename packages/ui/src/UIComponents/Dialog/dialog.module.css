@@ -35,7 +35,7 @@
 /* ——— DIALOG BODY ——— */
 .dialog {
   position: relative;
-  background: var(--background-primary);
+  background: var(--background-card-primary);
   border-radius: var(--radius-modal);
   /* Mobile-first: compact padding */
   padding: var(--yuanhhou-spacing-250, 20px);

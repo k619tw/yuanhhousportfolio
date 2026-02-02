@@ -62,8 +62,25 @@ export const Portfolio: React.FC = () => {
 
   const onboardingTitle = t(`portfolio.onboarding.greeting.${getTimeOfDay()}`)
 
+  // Announcements for screen readers
+  const [announcement, setAnnouncement] = useState('')
+
+  useEffect(() => {
+    // Announce language changes
+    setAnnouncement(t('aria.languageChanged', { lang: i18n.language }))
+  }, [i18n.language, t])
+
+  useEffect(() => {
+    // Announce view changes (home/work/settings)
+    setAnnouncement(t('aria.viewChanged', { view: t(`portfolio.nav.${currentView === 'home' ? 'about' : currentView}`) }))
+  }, [currentView, t])
+
   return (
     <div className={`${styles.portfolio} ${enhancedContrast ? styles.enhancedContrast : ''}`}>
+      {/* Skip link for keyboard users */}
+      <a href="#main-content" className={styles.skipLink}>{t('aria.skipToContent')}</a>
+      {/* ARIA live region for announcements */}
+      <div aria-live="polite" aria-atomic="true" className={styles.srOnly}>{announcement}</div>
       {/* Navigation Bar */}
       <nav className={styles.navbar}>
         <div className={styles.navContainer}>
@@ -96,7 +113,7 @@ export const Portfolio: React.FC = () => {
             <button
               className={styles.hamburger}
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label={isMenuOpen ? 'Close menu' : 'Open menu'}
+              aria-label={isMenuOpen ? t('portfolio.nav.closeMenu') : t('portfolio.nav.openMenu')}
               aria-expanded={isMenuOpen}
               aria-controls="primary-navigation"
             >
@@ -114,7 +131,7 @@ export const Portfolio: React.FC = () => {
         </div>
       </nav>
       {/* Hero Section */}
-      <main className={styles.main}>
+      <main id="main-content" className={styles.main}>
         {currentView === 'home' ? (
           <div className={styles.grid}>
             <section className={styles.hero}>
@@ -239,6 +256,7 @@ export const Portfolio: React.FC = () => {
       <Dialog
         open={showOnboarding}
         onClose={handleOnboardingComplete}
+        closeLabel={t('dialog.close')}
         closeOnOverlayClick={false}
         closeOnEscape={false}
         title={onboardingTitle}

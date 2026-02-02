@@ -39,13 +39,13 @@
   
   /* ——— BACKGROUNDS ——— */
   
-  /* Primary page/surface backgrounds - warm natural white */
-  --background-primary: var(--yuanhhou-warm-grey-100);              /* warm white */
-  --background-secondary: var(--yuanhhou-warm-grey-200);            /* soft warm grey */
+   /* Primary page/surface backgrounds (swapped) */
+   --background-primary: var(--yuanhhou-warm-grey-200);              /* soft warm grey */
+   --background-secondary: var(--yuanhhou-warm-grey-100);            /* warm white */
 
   /* Card surfaces - natural paper feel */
-  --background-card-primary: var(--yuanhhou-grey-0-alpha-100);      /* pure white card */
-  --background-card-secondary: var(--yuanhhou-warm-grey-100);       /* warm white */
+   --background-card-primary: var(--yuanhhou-warm-grey-100);        /* warm white */
+   --background-card-secondary: var(--yuanhhou-grey-0-alpha-100);    /* pure white card */
   --background-card-inverted: var(--yuanhhou-grey-800-alpha-100);   /* charcoal */
 
   /* Brand backgrounds - MUJI red-brown (terracotta) */

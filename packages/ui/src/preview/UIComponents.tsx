@@ -8,6 +8,7 @@ import { Button } from '../UIComponents/Button/Button';
 import { Card } from '../UIComponents/Card/Card';
 import { Chip, ChipGroup } from '../UIComponents/Chip';
 import { Dialog } from '../UIComponents/Dialog/Dialog';
+import { Hero } from '../UIComponents/Hero/Hero';
 import { Toggle } from '../UIComponents/Toggle/Toggle';
 import { Portfolio } from '../portfolio';
 import { ThemeSelector } from '../portfolio/ThemeSelector';
@@ -112,6 +113,8 @@ export default function App() {
       <div style={{ padding: 24, maxWidth: 1440, margin: '0 auto' }}>
         <h1 style={{ marginBottom: 32, color: 'var(--foreground-primary)' }}>{t('sections.componentLibrary')}</h1>
 
+      
+
       {/* Accordion Component */}
       <section style={{ marginBottom: 48 }}>
         <h2 style={{ marginBottom: 24, fontSize: 24, fontWeight: 600, color: 'var(--foreground-primary)' }}>{t('sections.accordion')}</h2>
@@ -146,6 +149,34 @@ export default function App() {
             },
           ]}
         />
+      </section>
+
+      {/* Hero Component (default + brand) - stacked */}
+      <section style={{ marginBottom: 48 }}>
+        <h2 style={{ marginBottom: 24, fontSize: 24, fontWeight: 600, color: 'var(--foreground-primary)' }}>{t('sections.hero')}</h2>
+        <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+          <div>
+            <h3 style={{ margin: '0 0 12px 0', fontSize: 16, color: 'var(--foreground-secondary)' }}>{t('preview.hero.defaultLabel')}</h3>
+            <Hero
+              title={t('portfolio.hero.title')}
+              subtitle={t('portfolio.hero.subtitle')}
+              imageSrc="https://k619tw.github.io/yuanhhou/about/img/profile.webp"
+              imageAlt={t('portfolio.hero.imageAlt')}
+              headingLevel="h3"
+            />
+          </div>
+          <div>
+            <h3 style={{ margin: '0 0 12px 0', fontSize: 16, color: 'var(--foreground-secondary)' }}>{t('preview.hero.brandLabel')}</h3>
+            <Hero
+              title={t('portfolio.hero.title')}
+              subtitle={t('portfolio.hero.subtitle')}
+              imageSrc="https://k619tw.github.io/yuanhhou/about/img/profile.webp"
+              imageAlt={t('portfolio.hero.imageAlt')}
+              headingLevel="h3"
+              type="brand"
+            />
+          </div>
+        </div>
       </section>
 
       {/* Badge Component */}
@@ -284,35 +315,35 @@ export default function App() {
 
         {/* Button vs Link */}
         <div style={{ marginBottom: 32 }}>
-          <h3 style={{ marginBottom: 16, fontSize: 18, fontWeight: 500, color: 'var(--foreground-secondary)' }}>Button vs Link</h3>
+          <h3 style={{ marginBottom: 16, fontSize: 18, fontWeight: 500, color: 'var(--foreground-secondary)' }}>{t('preview.buttonVsLink.title')}</h3>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button variant="primary" size="large" onClick={() => alert('Button clicked!')}>This is a Button</Button>
-            <Button variant="primary" size="large" href="https://github.com" target="_blank" rel="noopener noreferrer">This is a Link</Button>
-            <Button variant="secondary" size="large" onClick={() => alert('Button clicked!')}>Secondary Button</Button>
-            <Button variant="secondary" size="large" href="#card-section">Secondary Link (anchor)</Button>
+            <Button variant="primary" size="large" onClick={() => alert(t('preview.buttonVsLink.alert'))}>{t('preview.buttonVsLink.button')}</Button>
+            <Button variant="primary" size="large" href="https://github.com" target="_blank" rel="noopener noreferrer">{t('preview.buttonVsLink.link')}</Button>
+            <Button variant="secondary" size="large" onClick={() => alert(t('preview.buttonVsLink.alert'))}>{t('preview.buttonVsLink.secondaryButton')}</Button>
+            <Button variant="secondary" size="large" href="#card-section">{t('preview.buttonVsLink.secondaryLink')}</Button>
           </div>
           <p style={{ marginTop: 12, fontSize: 13, color: 'var(--foreground-tertiary)' }}>
-            💡 Tip: Right-click the link buttons to see native browser context menu (Open in new tab, Copy link, etc.)
+            💡 {t('preview.buttonVsLink.tip')}
           </p>
         </div>
 
         {/* Icon-Only Buttons */}
         <div style={{ marginBottom: 32 }}>
-          <h3 style={{ marginBottom: 16, fontSize: 18, fontWeight: 500, color: 'var(--foreground-secondary)' }}>Icon-Only Buttons</h3>
+          <h3 style={{ marginBottom: 16, fontSize: 18, fontWeight: 500, color: 'var(--foreground-secondary)' }}>{t('preview.iconOnly.title')}</h3>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center', marginBottom: 16 }}>
-            <Button iconOnly icon={<Plus style={iconSize.lg} weight="bold" />} variant="primary" size="large" aria-label="Add item" />
-            <Button iconOnly icon={<Heart style={iconSize.lg} weight="bold" />} variant="secondary" size="large" aria-label="Add to favorites" />
-            <Button iconOnly icon={<PencilSimple style={iconSize.lg} weight="bold" />} variant="tertiary" size="large" aria-label="Edit" />
-            <Button iconOnly icon={<Trash style={iconSize.lg} weight="bold" />} variant="alert" size="large" aria-label="Delete" />
+            <Button iconOnly icon={<Plus style={iconSize.lg} weight="bold" />} variant="primary" size="large" aria-label={t('preview.iconLabels.addItem')} />
+            <Button iconOnly icon={<Heart style={iconSize.lg} weight="bold" />} variant="secondary" size="large" aria-label={t('preview.iconLabels.addFavorite')} />
+            <Button iconOnly icon={<PencilSimple style={iconSize.lg} weight="bold" />} variant="tertiary" size="large" aria-label={t('preview.iconLabels.edit')} />
+            <Button iconOnly icon={<Trash style={iconSize.lg} weight="bold" />} variant="alert" size="large" aria-label={t('preview.iconLabels.delete')} />
           </div>
           <div style={{ display: 'flex', gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
-            <Button iconOnly icon={<Plus style={iconSize.md} weight="bold" />} variant="primary" size="small" aria-label="Add item" />
-            <Button iconOnly icon={<Heart style={iconSize.md} weight="bold" />} variant="secondary" size="small" aria-label="Add to favorites" />
-            <Button iconOnly icon={<MagnifyingGlass style={iconSize.md} weight="bold" />} variant="tertiary" size="small" aria-label="Search" />
-            <Button iconOnly icon={<Trash style={iconSize.md} weight="bold" />} variant="alert" size="small" aria-label="Delete" />
+            <Button iconOnly icon={<Plus style={iconSize.md} weight="bold" />} variant="primary" size="small" aria-label={t('preview.iconLabels.addItem')} />
+            <Button iconOnly icon={<Heart style={iconSize.md} weight="bold" />} variant="secondary" size="small" aria-label={t('preview.iconLabels.addFavorite')} />
+            <Button iconOnly icon={<MagnifyingGlass style={iconSize.md} weight="bold" />} variant="tertiary" size="small" aria-label={t('preview.iconLabels.search')} />
+            <Button iconOnly icon={<Trash style={iconSize.md} weight="bold" />} variant="alert" size="small" aria-label={t('preview.iconLabels.delete')} />
           </div>
           <p style={{ marginTop: 12, fontSize: 13, color: 'var(--foreground-tertiary)' }}>
-            💡 Icon-only buttons require an aria-label for accessibility
+            💡 {t('preview.iconOnly.tip')}
           </p>
         </div>
       </section>

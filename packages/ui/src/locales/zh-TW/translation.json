@@ -12,6 +12,7 @@
     "chip": "晶片元件",
     "dialog": "對話框元件",
     "toggle": "切換元件"
+    ,"hero": "Hero 元件"
   },
   "sizes": {
     "small": "小尺寸",
@@ -101,6 +102,7 @@
     "gotIt": "知道了",
     "delete": "刪除",
     "customAction": "自訂操作"
+    ,"close": "關閉"
   },  "chip": {
     "states": "狀態",
     "unselected": "未選中",
@@ -143,12 +145,15 @@
       "about": "關於",
       "work": "作品",
       "contact": "聯絡",
-      "settings": "設定"
+      "settings": "設定",
+      "openMenu": "開啟選單",
+      "closeMenu": "關閉選單"
     },
     "hero": {
-      "title": "我是一位跨領域的設計師，對工藝有執著。",
-      "subtitle": "我為數位產品構建與維護設計系統與元件，將可及的設計與可投入生產的程式碼結合。",
-      "cta": "查看作品"
+      "title": "我是一位跨領域設計師，具備多方面經驗的設計專家。",
+      "subtitle": "在網站與行動產品交付，以及以無障礙為重點的企業設計系統構建方面具有豐富經驗。",
+      "cta": "查看作品",
+      "imageAlt": "Hero 圖像"
     },
     "placeholder": "您的作品集內容將顯示在這裡",
     "settings": {
@@ -195,6 +200,37 @@
       "themeStep": "選擇符合您心情的主題",
       "settingsHint": "您可以隨時在設定中更改",
       "letsGo": "開始瀏覽"
+    }
+  },
+  "aria": {
+    "skipToContent": "前往主要內容",
+    "languageChanged": "語言已變更為 {{lang}}",
+    "viewChanged": "檢視已切換為 {{view}}"
+  },
+  "preview": {
+    "hero": {
+      "defaultLabel": "預設",
+      "brandLabel": "品牌"
+    },
+    "iconOnly": {
+      "title": "僅圖示按鈕",
+      "tip": "僅圖示的按鈕需要 aria-label 以利無障礙使用"
+    },
+    "buttonVsLink": {
+      "title": "按鈕 vs 連結",
+      "button": "這是一個按鈕",
+      "link": "這是一個連結",
+      "secondaryButton": "次要按鈕",
+      "secondaryLink": "次要連結 (anchor)",
+      "tip": "提示：右鍵點擊連結按鈕以查看瀏覽器原生選單（在新分頁開啟、複製連結等）",
+      "alert": "按鈕已被點擊！"
+    },
+    "iconLabels": {
+      "addItem": "新增項目",
+      "addFavorite": "加入最愛",
+      "edit": "編輯",
+      "search": "搜尋",
+      "delete": "刪除"
     }
   }
 }

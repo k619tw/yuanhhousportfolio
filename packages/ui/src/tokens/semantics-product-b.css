@@ -34,13 +34,13 @@
   
   /* ——— BACKGROUNDS ——— */
   
-  /* Primary page/surface backgrounds (EVA dark purple tint) */
-  --background-primary: var(--yuanhhou-purple-900);                /* #1e0532 - deep EVA purple */
-  --background-secondary: var(--yuanhhou-purple-800);              /* #320050 */
+   /* Primary page/surface backgrounds (swapped) */
+   --background-primary: var(--yuanhhou-purple-800);                /* #320050 */
+   --background-secondary: var(--yuanhhou-purple-900);              /* #1e0532 - deep EVA purple */
 
   /* Card surfaces */
-  --background-card-primary: var(--yuanhhou-purple-800);           /* #320050 */
-  --background-card-secondary: var(--yuanhhou-purple-700);         /* #4b0078 */
+   --background-card-primary: var(--yuanhhou-purple-700);           /* #4b0078 */
+   --background-card-secondary: var(--yuanhhou-purple-800);         /* #320050 */
   --background-card-inverted: var(--yuanhhou-lime-300);            /* #a0ff3c - bright lime */
 
   /* Brand backgrounds (EVA Unit-01 purple) */

@@ -12,6 +12,7 @@
     "chip": "Chip Component",
     "dialog": "Dialog Component",
     "toggle": "Toggle Component"
+    ,"hero": "Hero Component"
   },
   "sizes": {
     "small": "Small Size",
@@ -119,6 +120,7 @@
     "gotIt": "Got it",
     "delete": "Delete",
     "customAction": "Custom Action"
+    ,"close": "Close"
   },
   "toggle": {
     "title": "Toggle Component",
@@ -144,12 +146,15 @@
       "about": "About",
       "work": "Work",
       "contact": "Contact",
-      "settings": "Settings"
+      "settings": "Settings",
+      "openMenu": "Open menu",
+      "closeMenu": "Close menu"
     },
     "hero": {
-      "title": "I'm a multi-disciplinary  designer obsessed with craft",
-      "subtitle": "I build and maintain design systems and components across digital products, blending accessible design with production ready code.",
-      "cta": "View my work"
+      "title": "I am a design specialist experienced in multiple aspects of enterprise delivery.",
+      "subtitle": "Extensive experience delivering web and mobile products and enterprise design systems with a focus on accessibility.",
+      "cta": "View my work",
+      "imageAlt": "Hero image"
     },
     "placeholder": "Your portfolio content goes here",
     "settings": {
@@ -186,6 +191,7 @@
         "link": "Coming Soon"
       }
     },
+    
     "onboarding": {
       "greeting": {
         "morning": "Good morning",
@@ -197,5 +203,37 @@
       "settingsHint": "You can change these anytime in Settings",
       "letsGo": "Enjoy"
     }
+  },
+  "aria": {
+    "skipToContent": "Skip to main content",
+    "languageChanged": "Language changed to {{lang}}",
+    "viewChanged": "View changed to {{view}}"
+  },
+  "preview": {
+    "hero": {
+      "defaultLabel": "Default",
+      "brandLabel": "Brand"
+    },
+    "iconOnly": {
+      "title": "Icon-Only Buttons",
+      "tip": "Icon-only buttons require an aria-label for accessibility"
+    },
+    "buttonVsLink": {
+      "title": "Button vs Link",
+      "button": "This is a Button",
+      "link": "This is a Link",
+      "secondaryButton": "Secondary Button",
+      "secondaryLink": "Secondary Link (anchor)",
+      "tip": "Tip: Right-click the link buttons to see native browser context menu (Open in new tab, Copy link, etc.)",
+      "alert": "Button clicked!"
+    },
+    "iconLabels": {
+      "addItem": "Add item",
+      "addFavorite": "Add to favorites",
+      "edit": "Edit",
+      "search": "Search",
+      "delete": "Delete"
+    }
   }
 }
+

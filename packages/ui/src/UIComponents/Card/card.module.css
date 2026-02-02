@@ -54,7 +54,7 @@
 
 /* ——— VARIANT: Filled (background-secondary + radius) ——— */
 .card--filled {
-  background: var(--background-secondary);
+  background: var(--background-card-primary);
   border-radius: var(--radius-card);
   /* Mobile-first: compact padding */
   padding: var(--yuanhhou-spacing-200, 16px);
@@ -87,7 +87,7 @@
   width: 100%;
   max-width: 120px;
   height: 120px;
-  background: var(--background-secondary);
+  background: var(--background-card-primary);
   border-radius: var(--yuanhhou-border-radius-50, 4px);
   overflow: hidden;
 }
