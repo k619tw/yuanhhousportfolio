@@ -141,6 +141,8 @@ export const Portfolio: React.FC = () => {
                 imageSrc="https://images.unsplash.com/photo-1545239351-1141bd82e8a6?auto=format&fit=crop&w=900&q=60"
                 imageAlt="Abstract design shapes"
                 className={styles.heroLeft}
+                ctaLabel={t('portfolio.hero.cta') || 'View recent work'}
+                ctaHref="#work"
               />
               
             </section>

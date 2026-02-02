@@ -37,6 +37,20 @@
   padding: var(--yuanhhou-spacing-125, 10px) var(--yuanhhou-spacing-200);
   border-radius: var(--radius-button-small);
   gap: 4px;
+  /* Ensure small buttons have a consistent 40px height */
+  height: var(--yuanhhou-size-500); /* 40px */
+  min-height: var(--yuanhhou-size-500);
+}
+
+/* Increase interactive hit target for small buttons to meet 44x44 touch target
+   by adding a transparent pseudo-element that extends 2px around the button. */
+.small::after {
+  content: '';
+  position: absolute;
+  inset: -2px;
+  border-radius: inherit;
+  background: transparent;
+  pointer-events: auto;
 }
 
 @media (min-width: 481px) {

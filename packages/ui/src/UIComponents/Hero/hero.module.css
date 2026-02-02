@@ -53,7 +53,11 @@
   /* Subtitle uses Heading SM font-size only (font-size change only) */
   font-size: var(--yuanhhou-heading-sm-font-size);
   color: var(--foreground-secondary);
-  margin: 0;
+  margin: 0 0 var(--yuanhhou-spacing-900, 72px) 0; /* desktop: 72px */
+}
+
+.actions {
+  margin-top: var(--yuanhhou-spacing-200, 16px);
 }
 
 .media {
@@ -169,6 +173,11 @@
     text-align: left;
   }
 
+  /* tablet: reduce subtitle bottom spacing so button and text feel closer */
+  .subtitle {
+    margin-bottom: var(--yuanhhou-spacing-700, 56px);
+  }
+
   /* place image above text on mobile */
   .media {
     order: 1;
@@ -193,6 +202,11 @@
     padding-block-start: var(--yuanhhou-spacing-300, 24px);
     padding-block-end: var(--yuanhhou-spacing-500, 40px);
     padding-inline: var(--yuanhhou-spacing-200, 16px);
+  }
+
+  /* mobile: keep subtitle/button tighter but provide comfortable spacing */
+  .subtitle {
+    margin-bottom: var(--yuanhhou-spacing-500, 40px);
   }
 
   .media {

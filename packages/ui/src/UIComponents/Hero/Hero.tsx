@@ -1,5 +1,8 @@
 import React, { useId } from 'react'
 import styles from './hero.module.css'
+import Button from '../Button/Button'
+import { ArrowRight } from '@phosphor-icons/react'
+import { iconSize } from '../../utils/iconSize'
 
 export type HeroProps = {
   title: React.ReactNode
@@ -11,6 +14,12 @@ export type HeroProps = {
   type?: 'default' | 'brand'
   /** Heading level for accessibility (h1..h6) */
   headingLevel?: 'h1' | 'h2' | 'h3' | 'h4' | 'h5' | 'h6'
+  /** Optional call-to-action label */
+  ctaLabel?: React.ReactNode
+  /** Optional call-to-action link (renders an anchor) */
+  ctaHref?: string
+  /** Optional click handler for CTA (if not using href) */
+  onCtaClick?: React.MouseEventHandler
 }
 
 export const Hero: React.FC<HeroProps> = ({
@@ -21,6 +30,9 @@ export const Hero: React.FC<HeroProps> = ({
   className,
   type = 'default',
   headingLevel = 'h1',
+  ctaLabel,
+  ctaHref,
+  onCtaClick,
 }) => {
   const id = useId()
   const headingId = `hero-heading-${id}`
@@ -43,6 +55,13 @@ export const Hero: React.FC<HeroProps> = ({
           {title}
         </Tag>
         {subtitle && <p className={styles.subtitle}>{subtitle}</p>}
+        {ctaLabel && (
+          <div className={styles.actions}>
+            <Button variant="primary" size="small" href={ctaHref} onClick={onCtaClick as any} endIcon={<ArrowRight style={iconSize.md} weight="bold" />}>
+              {ctaLabel}
+            </Button>
+          </div>
+        )}
       </div>
 
       <div className={styles.media} aria-hidden={!imageSrc}>
