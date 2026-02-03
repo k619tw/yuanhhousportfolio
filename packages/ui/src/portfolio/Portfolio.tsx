@@ -11,7 +11,7 @@ import { Toggle } from '../UIComponents/Toggle/Toggle'
 import { Card } from '../UIComponents/Card/Card'
 import { useTheme } from '../ThemeProvider'
 import styles from './portfolio.module.css'
-import heroImg from '../assets/hero.jpeg'
+import heroImg from '../assets/hero.png'
 
 const ONBOARDING_KEY = 'portfolio-onboarding-complete'
 
