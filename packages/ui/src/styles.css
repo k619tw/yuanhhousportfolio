@@ -34,3 +34,59 @@ body {
   background-color: var(--background-primary);
   color: var(--foreground-primary);
 }
+
+/* Preview header - mobile-first stacking for tablet & mobile */
+.previewHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: stretch;
+  background: var(--background-primary);
+  border-bottom: 1px solid var(--border-tertiary);
+  padding: 16px 24px;
+}
+
+.previewHeader .headerBrand {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.previewHeader .headerActions {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  align-items: flex-start;
+}
+
+/* Ensure left alignment with the heading on small & tablet */
+.previewHeader .headerBrand,
+.previewHeader .headerActions {
+  width: 100%;
+  text-align: left;
+}
+
+@media (min-width: 900px) {
+  .previewHeader {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+  .previewHeader .headerBrand {
+    flex-direction: row;
+    gap: 16px;
+    align-items: center;
+  }
+  .previewHeader .headerActions {
+    flex-direction: row;
+    gap: 16px;
+    align-items: center; /* left-align the group visually on desktop */
+    flex-wrap: wrap; /* allow View button to drop below */
+    width: auto;
+    text-align: left;
+  }
+  /* Make the primary link occupy full row so it appears below the switchers */
+  .previewHeader .headerActions .previewPrimaryLink {
+    flex-basis: 100%;
+  }
+}

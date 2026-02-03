@@ -209,6 +209,10 @@
     "viewChanged": "表示が {{view}} に切り替わりました"
   },
   "preview": {
+    "header": {
+      "backToPortfolio": "ポートフォリオに戻る",
+      "viewComponents": "コンポーネントを見る"
+    },
     "hero": {
       "defaultLabel": "デフォルト",
       "brandLabel": "ブランド"

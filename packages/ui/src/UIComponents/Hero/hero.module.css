@@ -1,46 +1,33 @@
-/* Mobile-first: stack content by default for best a11y/responsiveness */
+/* Consolidated, cleaned Hero styles */
+
+/* Base - mobile-first */
 .hero {
   display: flex;
   flex-direction: column;
   gap: var(--yuanhhou-spacing-300, 24px);
-  align-items: stretch;
   width: 100%;
   box-sizing: border-box;
   position: relative;
   z-index: 10;
-  /* use spacing tokens instead of fixed pixel values */
   padding-block: var(--yuanhhou-spacing-500, 40px);
   padding-inline: var(--yuanhhou-spacing-400, 32px);
   border-radius: var(--radius-medium);
   background: var(--background-secondary);
-  /* no shadow for flat appearance */
-  box-shadow: none;
 }
 
-/* Brand variant: use brand secondary background and on-secondary text color */
 .hero.brand {
   background: var(--background-brand-secondary, var(--background-secondary));
   color: var(--foreground-brand-on-secondary, var(--foreground-primary));
 }
 
-.hero.brand .title,
-.hero.brand .subtitle {
-  /* ensure text uses foreground brand-on-secondary when brand variant is active */
+/* Ensure heading in brand variant uses on-primary token (higher contrast on brand background) */
+.hero.brand .title {
   color: var(--foreground-brand-on-secondary, var(--foreground-primary));
 }
 
-/* stronger elevation for brand variant so colored background reads as a lifted panel */
-.hero.brand {
-  box-shadow: none;
-}
-
-.text {
-  /* text area — full width on mobile, constrained on desktop */
-  flex: 0 0 auto;
-}
+.text { flex: 0 0 auto; }
 
 .title {
-  /* Use Heading LG tokens for size, line-height, weight and letter-spacing */
   font-size: var(--yuanhhou-heading-lg-font-size);
   line-height: var(--yuanhhou-heading-lg-line-height);
   font-weight: var(--yuanhhou-heading-lg-font-weight);
@@ -49,217 +36,74 @@
   margin: 0 0 var(--yuanhhou-spacing-300, 24px) 0;
 }
 
-.subtitle {
-  /* Subtitle uses Heading SM font-size only (font-size change only) */
-  font-size: var(--yuanhhou-heading-sm-font-size);
-  color: var(--foreground-secondary);
-  margin: 0 0 var(--yuanhhou-spacing-900, 72px) 0; /* desktop: 72px */
-}
+.subtitle { font-size: var(--yuanhhou-heading-sm-font-size); color: var(--foreground-secondary); }
 
-.actions {
-  margin-top: var(--yuanhhou-spacing-200, 16px);
-}
+.actions { margin-top: var(--yuanhhou-spacing-200, 16px); }
 
-.media {
-  /* media is full-width on mobile, constrained on desktop */
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
+/* Media & image - common rules */
+.media { display: flex; align-items: center; justify-content: center; }
 
 .image {
+  display: block;
   width: 100%;
-  max-width: none;
   height: auto;
+  max-width: 100%;
   border-radius: var(--radius-medium);
   box-shadow: none;
-  display: block;
-  object-fit: cover;
-  object-position: center center;
-  /* responsive max-height: mobile -> tablet -> desktop */
-  max-height: 320px;
+  object-fit: contain;
+  object-position: center bottom;
+  max-height: 400px; /* sensible mobile default to avoid clipping */
 }
 
-@media (min-width: 600px) {
-  .image {
-    max-height: 400px;
-  }
+.placeholder { width: 100%; max-width: 480px; height: 220px; background: var(--background-secondary); border-radius: var(--radius-medium); }
+
+/* Tablet (600 - 899px) */
+@media (min-width: 600px) and (max-width: 899px) {
+  .image { max-height: 400px; object-position: center center; }
+  .media { overflow: visible; }
 }
 
+/* Desktop (>= 900px) - two-column layout */
 @media (min-width: 900px) {
-  .image {
-    max-height: 480px;
-  }
+  .hero { flex-direction: row; align-items: center; justify-content: space-between; min-height: 520px; padding-inline: 48px; }
+  .text { flex: 0 1 38%; }
+  .media { flex: 0 1 58%; height: 100%; overflow: hidden; border-radius: calc(var(--radius-medium) - 2px); padding: 0; display: flex; align-items: flex-end; justify-content: flex-end; }
+  .image { max-height: 100%; width: auto; object-position: right bottom; }
 }
 
-.placeholder {
-  width: 100%;
-  max-width: 480px;
-  height: 220px;
-  background: var(--background-secondary);
-  border-radius: var(--radius-medium);
-}
-
-@media (min-width: 900px) {
-  .hero {
-    flex-direction: row;
-    align-items: center;
-    /* distribute space between text and media on wide screens */
-    justify-content: space-between;
-    /* gap removed to allow even spacing via justify-content */
-    /* ensure the hero has enough height so the image can visually cover the background */
-    min-height: 520px;
-    padding-inline: 48px;
-  }
-
-  /* restore desktop line-height variable for headings */
-  .title {
-    /* Desktop: use Heading LG token set for consistent typography */
-    font-size: var(--yuanhhou-heading-lg-font-size);
-    line-height: var(--yuanhhou-heading-lg-line-height);
-    font-weight: var(--yuanhhou-heading-lg-font-weight);
-    letter-spacing: var(--yuanhhou-heading-lg-letter-spacing);
-    margin: 0 0 var(--yuanhhou-spacing-400, 32px) 0;
-  }
-
-  .text {
-    /* allow text area to take ~38% but shrink if needed */
-    flex: 0 1 38%;
-    text-align: left;
-  }
-
-  .media {
-    /* allow media to take ~58% but shrink if needed */
-    flex: 0 1 58%;
-    /* make media match the hero height and clip overflow so the image looks like a cover */
-    height: 100%;
-    overflow: hidden;
-    /* give the media a subtle radius to match the container */
-    border-radius: calc(var(--radius-medium) - 2px);
-  }
-
-  .image {
-    width: 100%;
-    height: 100%;
-  }
-}
-
-/* Brand variant: productB uses a more rounded feel */
-.hero.productB {
-  border-radius: var(--radius-large, 24px);
-}
-
-.hero.productB .media {
-  border-radius: calc(var(--radius-large, 24px) - 4px);
-}
-
-/* make sure image centers nicely */
-.image {
-  object-position: center center;
-}
-
-/* smaller screens keep compact spacing */
-@media (max-width: 899px) {
-  .hero {
-    gap: var(--yuanhhou-spacing-300, 24px);
-    text-align: left;
-  }
-
-  .title {
-    /* remove forced line-height on mobile so browser default applies */
-    line-height: normal;
-    /* restore spacing between heading and subtitle on mobile */
-    margin-bottom: var(--yuanhhou-spacing-300, 24px);
-    text-align: left;
-  }
-
-  /* tablet: reduce subtitle bottom spacing so button and text feel closer */
-  .subtitle {
-    margin-bottom: var(--yuanhhou-spacing-700, 56px);
-  }
-
-  /* place image above text on mobile */
-  .media {
-    order: 1;
-    width: 100%;
-    margin-top: 0;
-  }
-
-  .text {
-    order: 2;
-    text-align: left;
-  }
-
-  .image {
-    max-width: 100%;
-  }
-}
-
-/* Reduce vertical padding on very small screens and ensure image is full-bleed width */
+/* Small screens adjustments */
 @media (max-width: 599px) {
-  .hero {
-    /* preserve a smaller top padding but ensure a 40px bottom padding on very small viewports */
-    padding-block-start: var(--yuanhhou-spacing-300, 24px);
-    padding-block-end: var(--yuanhhou-spacing-500, 40px);
-    padding-inline: var(--yuanhhou-spacing-200, 16px);
-  }
-
-  /* mobile: keep subtitle/button tighter but provide comfortable spacing */
-  .subtitle {
-    margin-bottom: var(--yuanhhou-spacing-500, 40px);
-  }
-
-  .media {
-    width: 100%;
-  }
-
-  .image {
-    max-width: 100%;
-    height: auto;
-    max-height: none;
-  }
+  .hero { padding-block-start: var(--yuanhhou-spacing-300, 24px); padding-block-end: var(--yuanhhou-spacing-500, 40px); padding-inline: var(--yuanhhou-spacing-200, 16px); }
+  .media { width: 100%; overflow: visible; }
+  .image { max-height: 400px; object-position: center bottom; }
 }
 
-/* (CTA removed) */
-
-/* Global fallback: some build outputs use hashed classnames for `.hero`.
-   Ensure those generated classes receive token-based bottom padding in production.
-   Targets specific legacy/generated classname and any class containing `_hero_`. */
-:global(._hero_tceyh_2) {
-  padding-bottom: var(--yuanhhou-spacing-500, 40px);
+/* For viewports 900px and below: place media above text */
+@media (max-width: 900px) {
+  .hero { flex-direction: column; }
+  .media { order: -1; width: 100%; }
+  .text { order: 0; }
+  .title { text-align: left; }
+  .image { object-position: center top; }
 }
 
-:global([class*="_hero_"]) {
-  padding-bottom: var(--yuanhhou-spacing-500, 40px);
-}
+/* Brand variant rounding */
+.hero.productB { border-radius: var(--radius-large, 24px); }
+.hero.productB .media { border-radius: calc(var(--radius-large, 24px) - 4px); }
 
-/* Circle selfie styles (static variant, animation removed) */
-.circle {
-  width: 220px;
-  height: 220px;
-  border-radius: 50%;
-  overflow: hidden;
-  position: relative;
-  display: inline-block;
-  box-shadow: 0 6px 20px rgba(0,0,0,0.12);
-  background: var(--background-surface, #fff);
-}
+/* Circle variant */
+.circle { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; position: relative; display: inline-block; box-shadow: none; background: transparent; }
+.circleImage { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
 
-.circleImage {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: center center;
-  opacity: 1;
-}
+/* Global fallbacks for generated classnames */
+:global(._hero_tceyh_2), :global([class*="_hero_"]) { padding-bottom: var(--yuanhhou-spacing-500, 40px); }
 
-/* Responsive sizing for circle */
-@media (min-width: 600px) {
-  .circle { width: 260px; height: 260px; }
+/* Accessibility: ensure interactive elements inside hero have visible focus styles */
+.actions :where(a, button) {
+  outline: none;
 }
-
-@media (min-width: 900px) {
-  .circle { width: 320px; height: 320px; }
+.actions :where(a, button):focus-visible {
+  box-shadow: 0 0 0 3px var(--focus-ring, rgba(59,130,246,0.45));
+  border-radius: 8px;
+  outline: none;
 }

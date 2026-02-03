@@ -208,6 +208,10 @@
     "viewChanged": "檢視已切換為 {{view}}"
   },
   "preview": {
+    "header": {
+      "backToPortfolio": "返回作品集",
+      "viewComponents": "查看元件"
+    },
     "hero": {
       "defaultLabel": "預設",
       "brandLabel": "品牌"

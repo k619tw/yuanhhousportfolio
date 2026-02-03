@@ -210,6 +210,10 @@
     "viewChanged": "View changed to {{view}}"
   },
   "preview": {
+    "header": {
+      "backToPortfolio": "Back to portfolio",
+      "viewComponents": "View components"
+    },
     "hero": {
       "defaultLabel": "Default",
       "brandLabel": "Brand"

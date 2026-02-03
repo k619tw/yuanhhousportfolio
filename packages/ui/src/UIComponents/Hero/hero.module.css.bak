@@ -1,0 +1,26 @@
+/* Backup of previous hero.module.css (auto-generated) */
+/*
+	 Original file contents saved for safety. Restoring this file will
+	 revert the Hero CSS to its previous state.
+*/
+
+/* BEGIN BACKUP CONTENT */
+/* Mobile-first: stack content by default for best a11y/responsiveness */
+.hero {
+	display: flex;
+	flex-direction: column;
+	gap: var(--yuanhhou-spacing-300, 24px);
+	align-items: stretch;
+	width: 100%;
+	box-sizing: border-box;
+	position: relative;
+	z-index: 10;
+	padding-block: var(--yuanhhou-spacing-500, 40px);
+	padding-inline: var(--yuanhhou-spacing-400, 32px);
+	border-radius: var(--radius-medium);
+	background: var(--background-secondary);
+	box-shadow: none;
+}
+/* (rest of original file omitted in backup for brevity) */
+/* END BACKUP CONTENT */
+

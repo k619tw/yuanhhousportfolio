@@ -14,6 +14,7 @@ import { Portfolio } from '../portfolio';
 import { ThemeSelector } from '../portfolio/ThemeSelector';
 import { LanguageSwitcher } from './LanguageSwitcher';
 import { useTheme } from '../ThemeProvider';
+import heroImg from '../assets/hero.png';
 
 // Get initial view from URL hash
 const getViewFromHash = (): 'components' | 'portfolio' => {
@@ -51,19 +52,13 @@ export default function App() {
       ) : (
         <>
           {/* Sticky Header with Theme Toggle */}
-          <header style={{
+          <header className="previewHeader" style={{
             position: 'sticky',
             top: 0,
             zIndex: 100,
-            background: 'var(--background-primary)',
-            borderBottom: '1px solid var(--border-tertiary)',
-            padding: '16px 24px',
-            display: 'flex',
-            justifyContent: 'space-between',
-            alignItems: 'center',
             backdropFilter: 'blur(8px)',
           }}>
-            <div>
+            <div className="headerBrand">
               <h1 style={{ 
                 margin: 0, 
                 fontSize: 20, 
@@ -80,9 +75,12 @@ export default function App() {
                 {t('header.currentlyViewing', { theme: theme.replace('-', ' ') })}
               </span>
             </div>
-            <div style={{ display: 'flex', gap: 16, alignItems: 'center' }}>
+            <div className="headerActions">
+              <LanguageSwitcher />
+              <ThemeSelector />
               <a
                 href={currentView === 'components' ? '#portfolio' : '#components'}
+                className="previewPrimaryLink"
                 style={{
                   padding: '8px 16px',
                   background: 'var(--background-brand-primary)',
@@ -98,15 +96,8 @@ export default function App() {
                 onMouseEnter={(e) => (e.currentTarget.style.opacity = '0.9')}
                 onMouseLeave={(e) => (e.currentTarget.style.opacity = '1')}
               >
-                {currentView === 'components' ? 'View Portfolio' : 'View Components'}
+                {currentView === 'components' ? t('preview.header.backToPortfolio') : t('preview.header.viewComponents')}
               </a>
-              <LanguageSwitcher />
-              <div style={{ 
-                width: 1, 
-                height: 24, 
-                background: 'var(--border-tertiary)' 
-              }} />
-              <ThemeSelector />
             </div>
           </header>
 
@@ -160,7 +151,7 @@ export default function App() {
             <Hero
               title={t('portfolio.hero.title')}
               subtitle={t('portfolio.hero.subtitle')}
-              imageSrc="https://k619tw.github.io/yuanhhou/about/img/profile.webp"
+              imageSrc={heroImg}
               imageAlt={t('portfolio.hero.imageAlt')}
               headingLevel="h3"
             />
@@ -170,7 +161,7 @@ export default function App() {
             <Hero
               title={t('portfolio.hero.title')}
               subtitle={t('portfolio.hero.subtitle')}
-              imageSrc="https://k619tw.github.io/yuanhhou/about/img/profile.webp"
+              imageSrc={heroImg}
               imageAlt={t('portfolio.hero.imageAlt')}
               headingLevel="h3"
               type="brand"

@@ -28,7 +28,7 @@ export const Hero: React.FC<HeroProps> = ({
   title,
   subtitle,
   imageSrc,
-  imageAlt = 'Hero image',
+  imageAlt = '',
   className,
   imageVariant = 'default',
   type = 'default',
@@ -47,18 +47,18 @@ export const Hero: React.FC<HeroProps> = ({
 
   const media = imageSrc ? (
     imageVariant === 'circle' ? (
-      <div className={styles.circle} aria-hidden={false}>
-        <img src={imageSrc} alt={imageAlt} className={styles.circleImage} loading="lazy" />
+      <div className={styles.circle}>
+        <img src={imageSrc} alt={imageAlt} className={styles.circleImage} loading="lazy" role="img" />
       </div>
     ) : (
-      <img src={imageSrc} alt={imageAlt} className={styles.image} loading="lazy" />
+      <img src={imageSrc} alt={imageAlt} className={styles.image} loading="lazy" role="img" />
     )
   ) : (
     <div className={styles.placeholder} aria-hidden={true} />
   )
 
   return (
-    <section className={classes} aria-labelledby={headingId}>
+    <section className={classes} aria-labelledby={headingId} role="region">
       <div className={styles.text}>
         <Tag id={headingId} className={styles.title}>
           {title}

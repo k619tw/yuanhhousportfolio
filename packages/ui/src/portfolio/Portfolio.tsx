@@ -141,7 +141,7 @@ export const Portfolio: React.FC = () => {
                 subtitle={t('portfolio.hero.subtitle')}
                 imageSrc={heroImg}
                 imageAlt={t('portfolio.hero.imageAlt')}
-                imageVariant="circle"
+                imageVariant="default"
                 className={styles.heroLeft}
                 ctaLabel={t('portfolio.hero.cta') || 'View recent work'}
                 ctaHref="#work"
