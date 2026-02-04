@@ -1,4 +1,4 @@
-import React, { useId, useState, useEffect } from 'react'
+import React, { useId } from 'react'
 import styles from './hero.module.css'
 import Button from '../Button/Button'
 import { ArrowRight } from '@phosphor-icons/react'
@@ -39,26 +39,7 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const id = useId()
   const headingId = `hero-heading-${id}`
-  const [isScrolling, setIsScrolling] = useState(false)
-
-  // Shake animation while scrolling, pause when stopped
-  useEffect(() => {
-    if (imageVariant !== 'decorated') return
-
-    let scrollTimeout: ReturnType<typeof setTimeout>
-
-    const handleScroll = () => {
-      setIsScrolling(true)
-      clearTimeout(scrollTimeout)
-      scrollTimeout = setTimeout(() => setIsScrolling(false), 150)
-    }
-
-    window.addEventListener('scroll', handleScroll, { passive: true })
-    return () => {
-      window.removeEventListener('scroll', handleScroll)
-      clearTimeout(scrollTimeout)
-    }
-  }, [imageVariant])
+  // animation on scroll removed — static decorative squares only
 
   const Tag: React.ElementType = headingLevel as React.ElementType
   const classes = [styles.hero, type === 'brand' ? styles.brand : '', className]
@@ -90,19 +71,19 @@ export const Hero: React.FC<HeroProps> = ({
   const media = imageSrc ? (
     imageVariant === 'circle' ? (
       <div className={styles.circle}>
-        <img src={imageSrc} alt={imageAlt} className={styles.circleImage} loading="lazy" role="img" />
+        <img src={imageSrc} alt={imageAlt} className={styles.circleImage} loading="lazy" aria-hidden={imageAlt === ''} />
       </div>
     ) : imageVariant === 'decorated' ? (
-      <div className={`${styles.decoratedContainer} ${isScrolling ? styles.animateSquares : ''}`}>
+      <div className={styles.decoratedContainer}>
         <StaircaseSquares position="topLeft" />
         <div className={styles.imageWrapper}>
           <div className={styles.imageOverlay} aria-hidden="true" />
-          <img src={imageSrc} alt={imageAlt} className={styles.decoratedImage} loading="lazy" role="img" />
+          <img src={imageSrc} alt={imageAlt} className={styles.decoratedImage} loading="lazy" aria-hidden={imageAlt === ''} />
         </div>
         <StaircaseSquares position="bottomRight" />
       </div>
     ) : (
-      <img src={imageSrc} alt={imageAlt} className={styles.image} loading="lazy" role="img" />
+      <img src={imageSrc} alt={imageAlt} className={styles.image} loading="lazy" aria-hidden={imageAlt === ''} />
     )
   ) : (
     <div className={styles.placeholder} aria-hidden={true} />

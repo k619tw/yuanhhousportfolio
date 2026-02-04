@@ -109,11 +109,16 @@
   /* Scaled proportionally: desktop is 420x480, mobile ~50% */
   width: 210px;
   min-height: 270px;
+  /* Keep the decorated container clipped to a matching radius so corners match the media container */
+  border-radius: var(--radius-medium);
+  overflow: hidden;
 }
 
 .imageWrapper {
   position: relative;
   z-index: 1;
+  /* Ensure the image also respects the container radius */
+  border-radius: inherit;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,6 +135,8 @@
   object-position: center bottom;
   position: relative;
   z-index: 2;
+  /* Nudge image down slightly to align with staircase row baseline */
+  transform: translateY(var(--yuanhhou-spacing-25, 2px));
 }
 
 /* Overlay effect - subtle silhouette behind image */
@@ -150,7 +157,7 @@
   position: absolute;
   display: flex;
   flex-direction: column;
-  gap: var(--yuanhhou-spacing-50, 4px); /* vertical gap between rows */
+  gap: 0; /* vertical gap removed */
   z-index: 0;
 }
 
@@ -168,7 +175,7 @@
 
 .squareRow {
   display: flex;
-  gap: var(--yuanhhou-spacing-50, 4px); /* horizontal gap between squares */
+  gap: 0; /* horizontal gap removed */
 }
 
 .staircaseBottomRight .squareRow {
@@ -184,17 +191,7 @@
   transform-origin: center center;
 }
 
-/* Shake animation while scrolling */
-.animateSquares .square {
-  /* Stronger shake while scrolling: faster and higher amplitude */
-  animation: squareShake 0.18s ease-in-out infinite;
-}
-
-@keyframes squareShake {
-  0%, 100% { transform: rotate(0deg) translateY(0); }
-  25% { transform: rotate(-3deg) translateY(-3px); }
-  75% { transform: rotate(3deg) translateY(3px); }
-}
+/* Animation removed: squares are static decorative elements now */
 
 /* Tablet (600px - 899px) - proportional scaling ~70% of desktop */
 @media (min-width: 600px) and (max-width: 899px) {
