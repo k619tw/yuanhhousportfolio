@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React, { useId, useState, useEffect } from 'react'
 import styles from './hero.module.css'
 import Button from '../Button/Button'
 import { ArrowRight } from '@phosphor-icons/react'
@@ -10,8 +10,8 @@ export type HeroProps = {
   imageSrc?: string
   imageAlt?: string
   className?: string
-  /** Image visual variant: 'default' or 'circle' */
-  imageVariant?: 'default' | 'circle'
+  /** Image visual variant: 'default', 'circle', or 'decorated' (with staircase squares) */
+  imageVariant?: 'default' | 'circle' | 'decorated'
   /** Visual variant: 'default' or 'brand' */
   type?: 'default' | 'brand'
   /** Heading level for accessibility (h1..h6) */
@@ -39,16 +39,67 @@ export const Hero: React.FC<HeroProps> = ({
 }) => {
   const id = useId()
   const headingId = `hero-heading-${id}`
+  const [isScrolling, setIsScrolling] = useState(false)
+
+  // Shake animation while scrolling, pause when stopped
+  useEffect(() => {
+    if (imageVariant !== 'decorated') return
+
+    let scrollTimeout: ReturnType<typeof setTimeout>
+
+    const handleScroll = () => {
+      setIsScrolling(true)
+      clearTimeout(scrollTimeout)
+      scrollTimeout = setTimeout(() => setIsScrolling(false), 150)
+    }
+
+    window.addEventListener('scroll', handleScroll, { passive: true })
+    return () => {
+      window.removeEventListener('scroll', handleScroll)
+      clearTimeout(scrollTimeout)
+    }
+  }, [imageVariant])
 
   const Tag: React.ElementType = headingLevel as React.ElementType
   const classes = [styles.hero, type === 'brand' ? styles.brand : '', className]
     .filter(Boolean)
     .join(' ')
 
+  // Staircase squares component for decorated variant
+  const StaircaseSquares = ({ position }: { position: 'topLeft' | 'bottomRight' }) => {
+    const isTopLeft = position === 'topLeft'
+    // Top-left: 4-3-2-1 pattern, Bottom-right: 1-2-3-4 pattern
+    const rows = isTopLeft ? [4, 3, 2, 1] : [1, 2, 3, 4]
+
+    return (
+      <div
+        className={isTopLeft ? styles.staircaseTopLeft : styles.staircaseBottomRight}
+        aria-hidden="true"
+      >
+        {rows.map((count, rowIndex) => (
+          <div key={rowIndex} className={styles.squareRow}>
+            {Array.from({ length: count }).map((_, i) => (
+              <div key={i} className={styles.square} />
+            ))}
+          </div>
+        ))}
+      </div>
+    )
+  }
+
   const media = imageSrc ? (
     imageVariant === 'circle' ? (
       <div className={styles.circle}>
         <img src={imageSrc} alt={imageAlt} className={styles.circleImage} loading="lazy" role="img" />
+      </div>
+    ) : imageVariant === 'decorated' ? (
+      <div className={`${styles.decoratedContainer} ${isScrolling ? styles.animateSquares : ''}`}>
+        <StaircaseSquares position="topLeft" />
+        <div className={styles.imageWrapper}>
+          <div className={styles.imageOverlay} aria-hidden="true" />
+          <img src={imageSrc} alt={imageAlt} className={styles.decoratedImage} loading="lazy" role="img" />
+        </div>
+        <StaircaseSquares position="bottomRight" />
       </div>
     ) : (
       <img src={imageSrc} alt={imageAlt} className={styles.image} loading="lazy" role="img" />

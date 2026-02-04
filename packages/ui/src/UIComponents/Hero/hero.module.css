@@ -38,7 +38,7 @@
 
 .subtitle { font-size: var(--yuanhhou-heading-sm-font-size); color: var(--foreground-secondary); }
 
-.actions { margin-top: var(--yuanhhou-spacing-200, 16px); }
+.actions { margin-top: var(--yuanhhou-spacing-500, 40px); }
 
 /* Media & image - common rules */
 .media { display: flex; align-items: center; justify-content: center; }
@@ -81,9 +81,11 @@
 /* For viewports 900px and below: place media above text */
 @media (max-width: 900px) {
   .hero { flex-direction: column; }
-  .media { order: -1; width: 100%; }
-  .text { order: 0; }
+  .media { order: -1; width: 100%; justify-content: flex-start; }
+  .text { order: 0; text-align: left; }
   .title { text-align: left; }
+  .subtitle { text-align: left; }
+  .actions { text-align: left; }
   .image { object-position: center top; }
 }
 
@@ -94,6 +96,150 @@
 /* Circle variant */
 .circle { width: 220px; height: 220px; border-radius: 50%; overflow: hidden; position: relative; display: inline-block; box-shadow: none; background: transparent; }
 .circleImage { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center center; }
+
+/* ========================================
+   Decorated variant - Mobile first (< 600px)
+   Proportional scaling like desktop
+   ======================================== */
+.decoratedContainer {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  /* Scaled proportionally: desktop is 420x480, mobile ~50% */
+  width: 210px;
+  min-height: 270px;
+}
+
+.imageWrapper {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.decoratedImage {
+  display: block;
+  width: auto;
+  /* Scaled proportionally: desktop is 400x515, mobile ~50% */
+  max-width: 200px;
+  max-height: 258px;
+  height: auto;
+  object-fit: contain;
+  object-position: center bottom;
+  position: relative;
+  z-index: 2;
+}
+
+/* Overlay effect - subtle silhouette behind image */
+.imageOverlay {
+  position: absolute;
+  inset: 0;
+  background: var(--foreground-brand-primary, #0070be);
+  opacity: 0.08;
+  filter: blur(20px);
+  transform: scale(1.1);
+  z-index: 0;
+  border-radius: 50%;
+}
+
+/* Staircase squares base styles */
+.staircaseTopLeft,
+.staircaseBottomRight {
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  gap: var(--yuanhhou-spacing-50, 4px); /* vertical gap between rows */
+  z-index: 0;
+}
+
+.staircaseTopLeft {
+  top: 0;
+  left: 0;
+}
+
+.staircaseBottomRight {
+  bottom: 0;
+  right: 0;
+  align-items: flex-end;
+  z-index: 3; /* On top of image */
+}
+
+.squareRow {
+  display: flex;
+  gap: var(--yuanhhou-spacing-50, 4px); /* horizontal gap between squares */
+}
+
+.staircaseBottomRight .squareRow {
+  justify-content: flex-end;
+}
+
+/* Square - uses theme token for multi-theme support */
+.square {
+  width: 20px;
+  height: 20px;
+  background-color: var(--foreground-brand-primary, #0070be);
+  flex-shrink: 0;
+  transform-origin: center center;
+}
+
+/* Shake animation while scrolling */
+.animateSquares .square {
+  /* Stronger shake while scrolling: faster and higher amplitude */
+  animation: squareShake 0.18s ease-in-out infinite;
+}
+
+@keyframes squareShake {
+  0%, 100% { transform: rotate(0deg) translateY(0); }
+  25% { transform: rotate(-3deg) translateY(-3px); }
+  75% { transform: rotate(3deg) translateY(3px); }
+}
+
+/* Tablet (600px - 899px) - proportional scaling ~70% of desktop */
+@media (min-width: 600px) and (max-width: 899px) {
+  .decoratedContainer {
+    width: 294px;
+    min-height: 378px;
+  }
+
+  .decoratedImage {
+    max-width: 280px;
+    max-height: 360px;
+  }
+
+  .square {
+    width: 28px;
+    height: 28px;
+  }
+
+  .imageOverlay {
+    filter: blur(25px);
+  }
+}
+
+/* Desktop (900px+) - full size */
+@media (min-width: 900px) {
+  .decoratedContainer {
+    width: 420px;
+    min-height: 520px;
+  }
+
+  .decoratedImage {
+    max-width: 400px;
+    max-height: 515px;
+  }
+
+  .square {
+    width: 40px;
+    height: 40px;
+  }
+
+  .imageOverlay {
+    filter: blur(30px);
+    transform: scale(1.15);
+  }
+}
 
 /* Global fallbacks for generated classnames */
 :global(._hero_tceyh_2), :global([class*="_hero_"]) { padding-bottom: var(--yuanhhou-spacing-500, 40px); }

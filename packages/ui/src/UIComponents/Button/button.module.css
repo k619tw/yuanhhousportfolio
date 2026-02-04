@@ -5,7 +5,7 @@
   font-family: var(--yuanhhou-font-family-primary);
   font-size: 15px;
   line-height: 20px;
-  font-weight: 590;
+  font-weight: var(--yuanhhou-font-weight-600);
   letter-spacing: -0.4px;
   border: none;
   cursor: pointer;
