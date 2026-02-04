@@ -145,6 +145,7 @@ export const Portfolio: React.FC = () => {
                 className={styles.heroLeft}
                 ctaLabel={t('portfolio.hero.cta') || 'View recent work'}
                 ctaHref="#work"
+                onCtaClick={() => { setCurrentView('work'); setIsMenuOpen(false); }}
               />
             </section>
 
