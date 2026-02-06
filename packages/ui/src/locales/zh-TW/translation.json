@@ -164,7 +164,9 @@
       "themeHint": "選擇符合您心情的主題",
       "accessibility": "無障礙功能",
       "enhancedContrast": "增強對比度",
-      "enhancedContrastHint": "提高文字不透明度與色彩對比，改善可讀性"
+      "enhancedContrastHint": "提高文字不透明度與色彩對比，改善可讀性",
+      "reduceMotion": "減少動態效果",
+      "reduceMotionHint": "減少動畫、轉場效果與自動播放的影片"
     },
     "work": {
       "title": "作品",
@@ -211,7 +213,7 @@
     "title": "有趣的事實",
     "subtitle": "一些你可能想知道的事",
     "companies": {
-      "title": "公司與產品\n我曾參與的項目"
+      "title": "我創造影響力的\n地方"
     },
     "tools": {
       "label": "我使用的創意工具"

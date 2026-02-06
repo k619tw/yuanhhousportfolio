@@ -1,11 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import { useTranslation } from 'react-i18next'
-import {
-  MapPin,
-  Briefcase,
-  GraduationCap,
-  CaretDown
-} from '@phosphor-icons/react'
+import { MapPin, Briefcase, GraduationCap } from '@phosphor-icons/react'
+import { Accordion, AccordionItem } from '../Accordion/Accordion'
 import styles from './about.module.css'
 
 export interface AboutProps {
@@ -33,19 +29,6 @@ interface Education {
  */
 export const About: React.FC<AboutProps> = ({ className }) => {
   const { t } = useTranslation()
-  const [openJobs, setOpenJobs] = useState<Set<string>>(new Set(['bupa']))
-
-  const toggleJob = (id: string) => {
-    setOpenJobs(prev => {
-      const next = new Set(prev)
-      if (next.has(id)) {
-        next.delete(id)
-      } else {
-        next.add(id)
-      }
-      return next
-    })
-  }
 
   const jobs: JobExperience[] = [
     {
@@ -135,6 +118,36 @@ export const About: React.FC<AboutProps> = ({ className }) => {
     },
   ]
 
+  // Transform jobs to AccordionItem format
+  const accordionItems: AccordionItem[] = jobs.map((job) => ({
+    id: job.id,
+    title: t(job.titleKey),
+    subtitle: (
+      <>
+        <span className={styles.jobDate}>{t(job.dateKey)}</span>
+        <span className={styles.jobLocation}>
+          <MapPin weight="duotone" size={12} aria-hidden="true" />
+          {t(job.locationKey)}
+        </span>
+      </>
+    ),
+    content: (
+      <>
+        <p className={styles.jobDescription}>{t(job.descriptionKey)}</p>
+        <div className={styles.responsibilities}>
+          <h5 className={styles.responsibilitiesTitle}>{t('about.responsibilitiesTitle')}</h5>
+          <ul className={styles.responsibilitiesList}>
+            {job.responsibilities.map((respKey) => (
+              <li key={respKey} className={styles.responsibilityItem}>
+                {t(respKey)}
+              </li>
+            ))}
+          </ul>
+        </div>
+      </>
+    ),
+  }))
+
   return (
     <section className={`${styles.about} ${className || ''}`} aria-labelledby="about-heading">
       <h2 id="about-heading" className={styles.srOnly}>{t('portfolio.nav.about')}</h2>
@@ -158,11 +171,11 @@ export const About: React.FC<AboutProps> = ({ className }) => {
                   <p className={styles.schoolName}>{t(edu.schoolKey)}</p>
                   <p className={styles.degree}>{t(edu.degreeKey)}</p>
                   <div className={styles.educationMeta}>
+                    <span className={styles.date}>{t(edu.dateKey)}</span>
                     <span className={styles.location}>
-                      <MapPin weight="bold" aria-hidden="true" />
+                      <MapPin weight="duotone" aria-hidden="true" />
                       {t(edu.locationKey)}
                     </span>
-                    <span className={styles.date}>{t(edu.dateKey)}</span>
                   </div>
                 </div>
               </div>
@@ -176,55 +189,11 @@ export const About: React.FC<AboutProps> = ({ className }) => {
             <Briefcase weight="duotone" className={styles.cardIcon} aria-hidden="true" />
             <h3 className={styles.cardTitle}>{t('about.experienceTitle')}</h3>
           </div>
-          <div className={styles.jobsList}>
-            {jobs.map((job) => {
-              const isOpen = openJobs.has(job.id)
-              return (
-                <div key={job.id} className={styles.jobItem}>
-                  <button
-                    type="button"
-                    className={styles.jobTrigger}
-                    aria-expanded={isOpen}
-                    aria-controls={`job-panel-${job.id}`}
-                    onClick={() => toggleJob(job.id)}
-                  >
-                    <div className={styles.jobTitleWrapper}>
-                      <span className={styles.jobTitle}>{t(job.titleKey)}</span>
-                      <span className={styles.jobMeta}>
-                        {t(job.dateKey)} · <MapPin weight="bold" size={12} aria-hidden="true" /> {t(job.locationKey)}
-                      </span>
-                    </div>
-                    <span
-                      className={styles.jobIcon}
-                      style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}
-                      aria-hidden="true"
-                    >
-                      <CaretDown weight="bold" size={20} />
-                    </span>
-                  </button>
-                  <div
-                    id={`job-panel-${job.id}`}
-                    className={styles.jobPanel}
-                    role="region"
-                    aria-labelledby={`job-trigger-${job.id}`}
-                    hidden={!isOpen}
-                  >
-                    <p className={styles.jobDescription}>{t(job.descriptionKey)}</p>
-                    <div className={styles.responsibilities}>
-                      <h5 className={styles.responsibilitiesTitle}>{t('about.responsibilitiesTitle')}</h5>
-                      <ul className={styles.responsibilitiesList}>
-                        {job.responsibilities.map((respKey) => (
-                          <li key={respKey} className={styles.responsibilityItem}>
-                            {t(respKey)}
-                          </li>
-                        ))}
-                      </ul>
-                    </div>
-                  </div>
-                </div>
-              )
-            })}
-          </div>
+          <Accordion
+            items={accordionItems}
+            allowMultiple
+            defaultOpen={['bupa']}
+          />
         </div>
       </div>
     </section>

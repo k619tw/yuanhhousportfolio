@@ -461,7 +461,7 @@
   border: 0.6px solid var(--border-tertiary);
 }
 
-/* === MIDDLE SECTION - GRADIENT CARD WITH OVERFLOW === */
+/* === MIDDLE SECTION - PORTRAIT CARD WITH OVERFLOW === */
 .gradientCard {
   width: 312px;
   height: 380px;
@@ -469,12 +469,23 @@
   border-radius: var(--yuanhhou-border-radius-125);
   overflow: visible;
   position: relative;
-  /* Custom gradient: info-primary (top-left) to success-primary (bottom-right) */
-  background: linear-gradient(
-    141.56deg,
-    var(--background-info-primary) 3.58%,
-    var(--background-success-primary) 97.98%
-  );
+  /* Diagonal brand gradient with cross-tone circle accents. */
+  background:
+    radial-gradient(
+      circle at 80% 88%,
+      var(--background-brand-secondary) 0%,
+      transparent 45%
+    ),
+    radial-gradient(
+      circle at 18% 15%,
+      var(--background-brand-primary) 0%,
+      transparent 35%
+    ),
+    linear-gradient(
+      145deg,
+      var(--background-brand-primary) 0%,
+      var(--background-brand-secondary) 100%
+    );
 }
 
 .gradientImageWrapper {
@@ -485,6 +496,7 @@
   left: -35px;
   top: -200px;
   overflow: visible;
+  z-index: 1;
 }
 
 .gradientImage {
@@ -651,6 +663,7 @@
   .middleSection {
     display: flex;
     flex-direction: column;
+    flex-wrap: wrap;
     gap: 14px;
   }
 
@@ -659,27 +672,69 @@
   .toolsCard,
   .sportyCard,
   .testimonialCard,
-  .bandCard,
-  .yearsCard,
   .travelCard,
   .statsCard {
     width: 100%;
   }
 
-  /* Band and years side by side on tablet */
+  /* Band and years side by side on tablet - create a row container effect */
   .bandCard,
   .yearsCard {
-    display: inline-flex;
     width: calc(50% - 7px);
+    min-height: 232px;
+    flex-shrink: 0;
   }
+
+  /* Use order to place band and years next to each other */
+  .sportyCard { order: 1; }
+  .bandCard { order: 2; }
+  .yearsCard { order: 3; }
+  .testimonialCard { order: 4; }
+  .travelCard { order: 5; }
+  .statsCard { order: 6; }
 
   /* Hide gradient card (hero image) on tablet - not meaningful on smaller screens */
   .gradientCard {
     display: none;
   }
 
+  /* CTA text wraps naturally; icon stays next to the last word */
+  .sportyCTA {
+    display: inline;
+    text-align: left;
+  }
+
+  .sportyCTA svg {
+    display: inline;
+    vertical-align: middle;
+    margin-left: var(--yuanhhou-spacing-50);
+  }
+
   .testimonialCard {
     min-height: 400px;
+  }
+}
+
+/* Tablet range: 768px - 1200px - ensure band and years cards stay side by side */
+@media (min-width: 768px) and (max-width: 1200px) {
+  .middleSection {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+
+  .sportyCard {
+    width: 100%;
+  }
+
+  .bandCard,
+  .yearsCard {
+    width: calc(50% - 7px);
+  }
+
+  .testimonialCard,
+  .travelCard,
+  .statsCard {
+    width: 100%;
   }
 }
 
@@ -758,6 +813,41 @@
 
   .sportyIcon {
     order: -1;
+  }
+
+  /* Smaller company logos on mobile */
+  .logoBupa {
+    height: 32px;
+  }
+
+  .logoBlua {
+    height: 26px;
+  }
+
+  .logoCtm {
+    height: 28px;
+  }
+
+  /* Smaller tool icons on mobile */
+  .toolIcon {
+    height: 48px;
+  }
+
+  .toolIconProtopie {
+    height: 60px;
+  }
+
+  .toolIconVSCode {
+    height: 44px;
+  }
+
+  .toolIconClaude {
+    height: 28px;
+  }
+
+  .adobeIcon {
+    height: 48px;
+    width: 48px;
   }
 
   /* Gradient card hidden on mobile (inherited from tablet) */

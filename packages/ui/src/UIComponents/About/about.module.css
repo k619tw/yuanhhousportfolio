@@ -102,24 +102,24 @@
 }
 
 .schoolName {
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  line-height: var(--yuanhhou-type-body-3-line-height);
-  font-weight: var(--yuanhhou-font-weight-regular);
-  color: var(--foreground-secondary);
+  font-size: var(--yuanhhou-body-lg-font-size);
+  line-height: var(--yuanhhou-body-lg-line-height);
+  font-weight: var(--yuanhhou-font-weight-semibold);
+  color: var(--foreground-primary);
   margin: 0;
 }
 
 .degree {
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  line-height: var(--yuanhhou-type-body-3-line-height);
+  font-size: var(--yuanhhou-body-lg-font-size);
+  line-height: var(--yuanhhou-body-lg-line-height);
   color: var(--foreground-secondary);
   margin: 0;
 }
 
 .educationMeta {
   display: flex;
-  flex-wrap: wrap;
-  gap: var(--yuanhhou-spacing-200);
+  flex-direction: column;
+  gap: var(--yuanhhou-spacing-50);
   margin-top: var(--yuanhhou-spacing-50);
 }
 
@@ -127,7 +127,7 @@
   display: inline-flex;
   align-items: center;
   gap: var(--yuanhhou-spacing-50);
-  font-size: var(--yuanhhou-type-body-3-font-size);
+  font-size: var(--yuanhhou-body-sm-font-size);
   color: var(--foreground-secondary);
 }
 
@@ -138,99 +138,28 @@
 }
 
 .date {
-  font-size: var(--yuanhhou-type-body-2-font-size);
-  line-height: var(--yuanhhou-type-body-2-line-height);
-  font-weight: var(--yuanhhou-font-weight-semibold);
-  color: var(--foreground-primary);
+  font-size: var(--yuanhhou-body-sm-font-size);
+  line-height: var(--yuanhhou-body-sm-line-height);
+  font-weight: var(--yuanhhou-font-weight-regular);
+  color: var(--foreground-secondary);
 }
 
-/* ===== Work Experience Card (Custom Disclosure) ===== */
-.jobsList {
-  display: flex;
-  flex-direction: column;
+/* ===== Work Experience Content (used inside Accordion) ===== */
+.jobDate {
+  white-space: nowrap;
 }
 
-.jobItem {
-  /* No divider lines */
-}
-
-.jobTrigger {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 100%;
-  padding: var(--yuanhhou-spacing-200) 0;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  text-align: left;
-  gap: var(--yuanhhou-spacing-150);
-  transition: color 0.15s ease;
-}
-
-.jobTrigger:hover {
-  color: var(--foreground-brand-primary);
-}
-
-.jobTrigger:hover .jobIcon {
-  color: var(--foreground-brand-primary);
-}
-
-.jobTrigger:focus-visible {
-  outline: 2px solid var(--border-focus);
-  outline-offset: 2px;
-}
-
-.jobTitleWrapper {
-  flex: 1;
-  display: flex;
-  flex-direction: column;
-  gap: var(--yuanhhou-spacing-50);
-}
-
-.jobTitle {
-  font-size: var(--yuanhhou-type-body-2-font-size);
-  font-weight: var(--yuanhhou-font-weight-semibold);
-  line-height: var(--yuanhhou-type-body-2-line-height);
-  color: var(--foreground-primary);
-}
-
-.jobMeta {
+.jobLocation {
   display: inline-flex;
   align-items: center;
   gap: var(--yuanhhou-spacing-50);
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  font-weight: var(--yuanhhou-font-weight-regular);
-  line-height: var(--yuanhhou-type-body-3-line-height);
-  color: var(--foreground-tertiary);
-}
-
-.jobIcon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-shrink: 0;
-  color: var(--foreground-secondary);
-  transition: transform 220ms ease, color 0.15s ease;
-}
-
-.jobPanel {
-  padding: 0 0 var(--yuanhhou-spacing-250) 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--yuanhhou-spacing-200);
-  overflow: hidden;
-  transition: opacity 200ms ease;
-}
-
-.jobPanel[hidden] {
-  display: none;
+  white-space: nowrap;
 }
 
 .jobDescription {
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  line-height: var(--yuanhhou-type-body-3-line-height);
-  color: var(--foreground-secondary);
+  font-size: var(--yuanhhou-body-lg-font-size);
+  line-height: var(--yuanhhou-body-lg-line-height);
+  color: var(--foreground-primary);
   margin: 0;
 }
 
@@ -241,8 +170,8 @@
 }
 
 .responsibilitiesTitle {
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  line-height: var(--yuanhhou-type-body-3-line-height);
+  font-size: var(--yuanhhou-body-md-font-size);
+  line-height: var(--yuanhhou-body-md-line-height);
   font-weight: var(--yuanhhou-font-weight-semibold);
   color: var(--foreground-primary);
   margin: 0;
@@ -260,9 +189,9 @@
 .responsibilityItem {
   position: relative;
   padding-left: var(--yuanhhou-spacing-200);
-  font-size: var(--yuanhhou-type-body-3-font-size);
-  line-height: var(--yuanhhou-type-body-3-line-height);
-  color: var(--foreground-tertiary);
+  font-size: var(--yuanhhou-body-md-font-size);
+  line-height: var(--yuanhhou-body-md-line-height);
+  color: var(--foreground-secondary);
 }
 
 .responsibilityItem::before {
@@ -281,6 +210,17 @@
   .educationCard,
   .experienceCard {
     padding: var(--yuanhhou-spacing-400);
+  }
+}
+
+/* ===== Stacked Layout (below 1024px) - Work Experience on top ===== */
+@media (max-width: 1023px) {
+  .experienceCard {
+    order: 1;
+  }
+
+  .educationCard {
+    order: 2;
   }
 }
 
@@ -307,15 +247,6 @@
 
   .experienceCard {
     flex: 1;
-  }
-}
-
-/* ===== Reduced Motion ===== */
-@media (prefers-reduced-motion: reduce) {
-  .jobTrigger,
-  .jobIcon,
-  .jobPanel {
-    transition: none;
   }
 }
 

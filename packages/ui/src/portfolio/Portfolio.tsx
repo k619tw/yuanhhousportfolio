@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
 import { List, X } from '@phosphor-icons/react'
 import { ChipGroup } from '../UIComponents/Chip'
@@ -12,15 +12,54 @@ import { Card } from '../UIComponents/Card/Card'
 import { InterestingFacts } from '../UIComponents/InterestingFacts'
 import { Footer } from '../UIComponents/Footer'
 import { About } from '../UIComponents/About'
-import { useTheme } from '../ThemeProvider'
+import { useTheme, type Theme } from '../ThemeProvider'
 import styles from './portfolio.module.css'
 import heroImg from '../assets/hero.png'
+
+import videoAen from '../assets/demo-product-a-en.mp4'
+import videoAja from '../assets/demo-product-a-ja.mp4'
+import videoAzh from '../assets/demo-product-a-zh-TW.mp4'
+import videoBen from '../assets/demo-product-b-en.mp4'
+import videoBja from '../assets/demo-product-b-ja.mp4'
+import videoBzh from '../assets/demo-product-b-zh-TW.mp4'
+import videoCen from '../assets/demo-product-c-en.mp4'
+import videoCja from '../assets/demo-product-c-ja.mp4'
+import videoCzh from '../assets/demo-product-c-zh-TW.mp4'
+import posterAen from '../assets/poster-product-a-en.png'
+import posterAja from '../assets/poster-product-a-ja.png'
+import posterAzh from '../assets/poster-product-a-zh-TW.png'
+import posterBen from '../assets/poster-product-b-en.png'
+import posterBja from '../assets/poster-product-b-ja.png'
+import posterBzh from '../assets/poster-product-b-zh-TW.png'
+import posterCen from '../assets/poster-product-c-en.png'
+import posterCja from '../assets/poster-product-c-ja.png'
+import posterCzh from '../assets/poster-product-c-zh-TW.png'
+import basketballVideo from '../assets/basketball.mp4'
+
+type HeroMedia = { video: string; poster: string }
+const heroVideos: Record<Theme, Record<string, HeroMedia>> = {
+  'product-a': {
+    en: { video: videoAen, poster: posterAen },
+    ja: { video: videoAja, poster: posterAja },
+    'zh-TW': { video: videoAzh, poster: posterAzh },
+  },
+  'product-b': {
+    en: { video: videoBen, poster: posterBen },
+    ja: { video: videoBja, poster: posterBja },
+    'zh-TW': { video: videoBzh, poster: posterBzh },
+  },
+  'product-c': {
+    en: { video: videoCen, poster: posterCen },
+    ja: { video: videoCja, poster: posterCja },
+    'zh-TW': { video: videoCzh, poster: posterCzh },
+  },
+}
 
 const ONBOARDING_KEY = 'portfolio-onboarding-complete'
 
 export const Portfolio: React.FC = () => {
   const { t, i18n } = useTranslation()
-  useTheme()
+  const { theme } = useTheme()
   const [isMenuOpen, setIsMenuOpen] = useState(false)
   const [currentView, setCurrentView] = useState<'home' | 'about' | 'work' | 'settings'>('home')
   const [selectedLanguage, setSelectedLanguage] = useState<(string | number)[]>([i18n.language])
@@ -49,8 +88,23 @@ export const Portfolio: React.FC = () => {
     }
   }
 
-  // hero right-side controls removed (moved into dedicated pages/components if needed)
   const [enhancedContrast, setEnhancedContrast] = useState(false)
+
+  // Reduce motion — persisted preference + synced to DOM attribute
+  const [reduceMotion, setReduceMotion] = useState(() => {
+    if (typeof window !== 'undefined') {
+      const stored = localStorage.getItem('yuanhhou-reduce-motion')
+      if (stored === 'true') return true
+      // Fall back to OS-level preference
+      return window.matchMedia('(prefers-reduced-motion: reduce)').matches
+    }
+    return false
+  })
+
+  useEffect(() => {
+    localStorage.setItem('yuanhhou-reduce-motion', String(reduceMotion))
+    document.documentElement.setAttribute('data-reduce-motion', String(reduceMotion))
+  }, [reduceMotion])
 
   const handleOnboardingComplete = () => {
     localStorage.setItem(ONBOARDING_KEY, 'true')
@@ -65,6 +119,18 @@ export const Portfolio: React.FC = () => {
   }
 
   const onboardingTitle = t(`portfolio.onboarding.greeting.${getTimeOfDay()}`)
+
+  // Basketball video dialog
+  const [showVideoDialog, setShowVideoDialog] = useState(false)
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const handleVideoDialogClose = useCallback(() => {
+    if (videoRef.current) {
+      videoRef.current.pause()
+      videoRef.current.currentTime = 0
+    }
+    setShowVideoDialog(false)
+  }, [])
 
   // Announcements for screen readers
   const [announcement, setAnnouncement] = useState('')
@@ -148,6 +214,9 @@ export const Portfolio: React.FC = () => {
               <Hero
                 title={t('portfolio.hero.title')}
                 subtitle={t('portfolio.hero.subtitle')}
+                videoSrc={(heroVideos[theme][i18n.language] || heroVideos[theme].en).video}
+                videoPoster={(heroVideos[theme][i18n.language] || heroVideos[theme].en).poster}
+                videoAutoplay={!reduceMotion}
                 imageSrc={heroImg}
                 imageAlt={t('portfolio.hero.imageAlt')}
                 className={styles.heroLeft}
@@ -158,7 +227,7 @@ export const Portfolio: React.FC = () => {
             </section>
 
             {/* Interesting Facts Section */}
-            <InterestingFacts />
+            <InterestingFacts onSportyCTAClick={() => setShowVideoDialog(true)} />
           </div>
         ) : currentView === 'about' ? (
           <div className={styles.grid}>
@@ -250,15 +319,25 @@ export const Portfolio: React.FC = () => {
                 <p className={styles.settingHint}>{t('portfolio.settings.themeHint')}</p>
               </div>
 
-              {/* Accessibility - Enhanced Contrast */}
+              {/* Accessibility */}
               <div className={styles.settingGroup}>
                 <label className={styles.settingLabel}>{t('portfolio.settings.accessibility')}</label>
-                <Toggle
-                  checked={enhancedContrast}
-                  onChange={(v) => setEnhancedContrast(v)}
-                  label={t('portfolio.settings.enhancedContrast')}
-                />
-                <p className={styles.settingHint}>{t('portfolio.settings.enhancedContrastHint')}</p>
+                <div className={styles.toggleItem}>
+                  <Toggle
+                    checked={enhancedContrast}
+                    onChange={(v) => setEnhancedContrast(v)}
+                    label={t('portfolio.settings.enhancedContrast')}
+                  />
+                  <p className={styles.settingHint}>{t('portfolio.settings.enhancedContrastHint')}</p>
+                </div>
+                <div className={styles.toggleItem}>
+                  <Toggle
+                    checked={reduceMotion}
+                    onChange={(v) => setReduceMotion(v)}
+                    label={t('portfolio.settings.reduceMotion')}
+                  />
+                  <p className={styles.settingHint}>{t('portfolio.settings.reduceMotionHint')}</p>
+                </div>
               </div>
             </section>
           </div>
@@ -306,6 +385,25 @@ export const Portfolio: React.FC = () => {
             </Button>
           </div>
         </div>
+      </Dialog>
+
+      {/* Basketball Video Dialog */}
+      <Dialog
+        open={showVideoDialog}
+        onClose={handleVideoDialogClose}
+        closeLabel={t('dialog.close')}
+        title={t('interestingFacts.sporty.title')}
+        className={styles.videoDialog}
+      >
+        <video
+          ref={videoRef}
+          src={basketballVideo}
+          controls
+          autoPlay
+          playsInline
+          className={styles.videoPlayer}
+          aria-label={t('interestingFacts.sporty.cta')}
+        />
       </Dialog>
     </div>
   )

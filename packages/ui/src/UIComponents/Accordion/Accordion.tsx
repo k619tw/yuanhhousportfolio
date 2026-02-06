@@ -1,26 +1,27 @@
-import React, { useState } from 'react';
-import { CaretDown } from '@phosphor-icons/react';
-import { iconSize } from '../../utils/iconSize';
-import styles from './accordion.module.css';
+import React, { useState } from 'react'
+import { CaretDown } from '@phosphor-icons/react'
+import styles from './accordion.module.css'
 
 export interface AccordionItem {
-  id: string;
-  title: React.ReactNode;
-  content: React.ReactNode;
-  /** Optional subtitle shown below title */
-  subtitle?: React.ReactNode;
+  id: string
+  /** Main title of the accordion item */
+  title: React.ReactNode
+  /** Content shown when the accordion is expanded */
+  content: React.ReactNode
+  /** Optional subtitle shown below title (e.g., date, location) */
+  subtitle?: React.ReactNode
+  /** Optional icon or image shown at the start of the accordion trigger */
+  icon?: React.ReactNode
 }
 
 export interface AccordionProps {
-  items: AccordionItem[];
+  items: AccordionItem[]
   /** Allow multiple items to be open at once (default: false) */
-  allowMultiple?: boolean;
+  allowMultiple?: boolean
   /** IDs of items that should be open by default */
-  defaultOpen?: string[];
+  defaultOpen?: string[]
   /** Optional class name for the container */
-  className?: string;
-  /** Compact mode for tighter spacing */
-  compact?: boolean;
+  className?: string
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -28,29 +29,28 @@ export const Accordion: React.FC<AccordionProps> = ({
   allowMultiple = false,
   defaultOpen = [],
   className = '',
-  compact = false,
 }) => {
-  const [openItems, setOpenItems] = useState<Set<string>>(new Set(defaultOpen));
+  const [openItems, setOpenItems] = useState<Set<string>>(new Set(defaultOpen))
 
   const handleToggle = (id: string) => {
     setOpenItems(prev => {
-      const next = new Set(prev);
+      const next = new Set(prev)
       if (next.has(id)) {
-        next.delete(id);
+        next.delete(id)
       } else {
         if (!allowMultiple) {
-          next.clear();
+          next.clear()
         }
-        next.add(id);
+        next.add(id)
       }
-      return next;
-    });
-  };
+      return next
+    })
+  }
 
   return (
-    <div className={`${styles.accordion} ${compact ? styles.compact : ''} ${className}`}>
+    <div className={`${styles.accordion} ${className}`}>
       {items.map((item) => {
-        const isOpen = openItems.has(item.id);
+        const isOpen = openItems.has(item.id)
         return (
           <div className={styles.item} key={item.id}>
             <button
@@ -61,16 +61,21 @@ export const Accordion: React.FC<AccordionProps> = ({
               onClick={() => handleToggle(item.id)}
               type="button"
             >
+              {item.icon && (
+                <span className={styles.itemIcon} aria-hidden="true">
+                  {item.icon}
+                </span>
+              )}
               <div className={styles.titleWrapper}>
                 <span className={styles.title}>{item.title}</span>
                 {item.subtitle && <span className={styles.subtitle}>{item.subtitle}</span>}
               </div>
               <span
-                className={styles.icon}
+                className={styles.caretIcon}
                 aria-hidden="true"
                 style={{ transform: isOpen ? 'rotate(0deg)' : 'rotate(-90deg)' }}
               >
-                <CaretDown weight="bold" style={iconSize.lg} />
+                <CaretDown weight="bold" size={20} />
               </span>
             </button>
             <div
@@ -83,8 +88,10 @@ export const Accordion: React.FC<AccordionProps> = ({
               {item.content}
             </div>
           </div>
-        );
+        )
       })}
     </div>
-  );
-};
+  )
+}
+
+export default Accordion

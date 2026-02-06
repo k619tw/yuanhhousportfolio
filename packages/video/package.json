@@ -1,0 +1,41 @@
+{
+  "name": "@yuanhhou/video",
+  "version": "0.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "studio": "remotion studio src/index.ts",
+    "render:a-en": "remotion render src/index.ts ComponentDemo-A-en out/demo-product-a-en.mp4",
+    "render:a-ja": "remotion render src/index.ts ComponentDemo-A-ja out/demo-product-a-ja.mp4",
+    "render:a-zh-TW": "remotion render src/index.ts ComponentDemo-A-zh-TW out/demo-product-a-zh-TW.mp4",
+    "render:b-en": "remotion render src/index.ts ComponentDemo-B-en out/demo-product-b-en.mp4",
+    "render:b-ja": "remotion render src/index.ts ComponentDemo-B-ja out/demo-product-b-ja.mp4",
+    "render:b-zh-TW": "remotion render src/index.ts ComponentDemo-B-zh-TW out/demo-product-b-zh-TW.mp4",
+    "render:c-en": "remotion render src/index.ts ComponentDemo-C-en out/demo-product-c-en.mp4",
+    "render:c-ja": "remotion render src/index.ts ComponentDemo-C-ja out/demo-product-c-ja.mp4",
+    "render:c-zh-TW": "remotion render src/index.ts ComponentDemo-C-zh-TW out/demo-product-c-zh-TW.mp4",
+    "render:all": "npm run render:a-en && npm run render:a-ja && npm run render:a-zh-TW && npm run render:b-en && npm run render:b-ja && npm run render:b-zh-TW && npm run render:c-en && npm run render:c-ja && npm run render:c-zh-TW",
+    "poster:a-en": "remotion still src/index.ts ComponentDemo-A-en out/poster-product-a-en.png --frame=100",
+    "poster:a-ja": "remotion still src/index.ts ComponentDemo-A-ja out/poster-product-a-ja.png --frame=100",
+    "poster:a-zh-TW": "remotion still src/index.ts ComponentDemo-A-zh-TW out/poster-product-a-zh-TW.png --frame=100",
+    "poster:b-en": "remotion still src/index.ts ComponentDemo-B-en out/poster-product-b-en.png --frame=100",
+    "poster:b-ja": "remotion still src/index.ts ComponentDemo-B-ja out/poster-product-b-ja.png --frame=100",
+    "poster:b-zh-TW": "remotion still src/index.ts ComponentDemo-B-zh-TW out/poster-product-b-zh-TW.png --frame=100",
+    "poster:c-en": "remotion still src/index.ts ComponentDemo-C-en out/poster-product-c-en.png --frame=100",
+    "poster:c-ja": "remotion still src/index.ts ComponentDemo-C-ja out/poster-product-c-ja.png --frame=100",
+    "poster:c-zh-TW": "remotion still src/index.ts ComponentDemo-C-zh-TW out/poster-product-c-zh-TW.png --frame=100",
+    "poster:all": "npm run poster:a-en && npm run poster:a-ja && npm run poster:a-zh-TW && npm run poster:b-en && npm run poster:b-ja && npm run poster:b-zh-TW && npm run poster:c-en && npm run poster:c-ja && npm run poster:c-zh-TW",
+    "build": "npm run render:all && npm run poster:all"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.296",
+    "@remotion/transitions": "4.0.296",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
+    "remotion": "4.0.296"
+  },
+  "devDependencies": {
+    "@remotion/eslint-config": "4.0.296",
+    "typescript": "^5.0.0"
+  }
+}

@@ -1,4 +1,4 @@
-import React, { useId } from 'react'
+import React, { useId, useEffect, useState } from 'react'
 import styles from './hero.module.css'
 import Button from '../Button/Button'
 import { ArrowRight } from '@phosphor-icons/react'
@@ -52,17 +52,30 @@ export const Hero: React.FC<HeroProps> = ({
   const id = useId()
   const headingId = `hero-heading-${id}`
 
+  // A11y: respect prefers-reduced-motion — show poster instead of autoplaying video
+  const [prefersReducedMotion, setPrefersReducedMotion] = useState(false)
+  useEffect(() => {
+    const mql = window.matchMedia('(prefers-reduced-motion: reduce)')
+    setPrefersReducedMotion(mql.matches)
+    const handler = (e: MediaQueryListEvent) => setPrefersReducedMotion(e.matches)
+    mql.addEventListener('change', handler)
+    return () => mql.removeEventListener('change', handler)
+  }, [])
+
   const Tag: React.ElementType = headingLevel as React.ElementType
   const classes = [styles.hero, type === 'brand' ? styles.brand : '', className]
     .filter(Boolean)
     .join(' ')
 
+  const shouldAutoplay = videoAutoplay && !prefersReducedMotion
+  const shouldShowVideo = shouldAutoplay
+
   const media = videoSrc ? (
     <video
       className={styles.video}
-      src={videoSrc}
+      src={shouldShowVideo ? videoSrc : undefined}
       poster={videoPoster}
-      autoPlay={videoAutoplay}
+      autoPlay={shouldAutoplay}
       loop={videoLoop}
       muted
       playsInline

@@ -165,7 +165,9 @@
       "themeHint": "気分に合わせてテーマを選んでください",
       "accessibility": "アクセシビリティ",
       "enhancedContrast": "コントラスト強化",
-      "enhancedContrastHint": "テキストの不透明度と色のコントラストを高めて、より良い読みやすさを提供します"
+      "enhancedContrastHint": "テキストの不透明度と色のコントラストを高めて、より良い読みやすさを提供します",
+      "reduceMotion": "モーション軽減",
+      "reduceMotionHint": "アニメーション、トランジション、自動再生動画を最小限に抑えます"
     },
     "work": {
       "title": "作品",
@@ -212,7 +214,7 @@
     "title": "興味深い事実",
     "subtitle": "知っておきたいこと",
     "companies": {
-      "title": "会社＆製品\n携わった実績"
+      "title": "インパクトを\n生み出した場所"
     },
     "tools": {
       "label": "使用するクリエイティブツール"

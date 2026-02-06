@@ -52,11 +52,9 @@ body {
 /* ——— NAVIGATION BAR ——— */
 .navbar {
   background: transparent;
-  position: sticky;
-  top: 0;
+  position: relative;
   z-index: 100;
   padding: var(--yuanhhou-spacing-400) var(--yuanhhou-spacing-400);
-  position: relative;
 }
 
 .navContainer {
@@ -141,20 +139,6 @@ body {
 .navLinks li a.active {
   color: var(--foreground-brand-primary);
   background: var(--background-interaction-active);
-}
-
-/* Controls - Theme Only */
-.controls {
-  display: flex;
-  align-items: center;
-  gap: var(--yuanhhou-spacing-200, 16px);
-  margin-left: auto;
-}
-
-.divider {
-  width: var(--yuanhhou-spacing-10);
-  height: var(--yuanhhou-spacing-300);
-  background: var(--border-tertiary);
 }
 
 /* Hamburger Menu */
@@ -278,12 +262,6 @@ body {
     display: block;
   }
 
-
-    
-  .divider {
-    display: none;
-  }
-
   .settings {
     grid-column: 1 / -1;
   }
@@ -346,108 +324,21 @@ body {
 
 /* Hero Section */
 .hero {
-  margin-bottom: var(--yuanhhou-spacing-400, 40px);
-  display: flex;
-  flex-direction: row;
-  gap: var(--yuanhhou-spacing-300, 24px);
-  align-items: center;
-}
-
-/* Typography for hero is managed by the `Hero` component's CSS module.
-   Removed page-level heading/paragraph overrides to avoid specificity
-   conflicts with the component's generated class names. */
-
-/* Specific hero title/subtitle utility classes so copy can be tweaked */
-.heroTitle {
-  font-size: calc(var(--yuanhhou-font-size-display-lg) + 4px);
-  font-weight: var(--yuanhhou-font-weight-700);
-  line-height: var(--yuanhhou-line-height-display-lg);
-  margin: 0 0 var(--yuanhhou-spacing-200, 16px) 0;
-}
-
-.heroSubtitle {
-  font-size: var(--yuanhhou-font-size-body-lg);
-  color: var(--foreground-secondary);
-  margin: 0;
-}
-
-@media (max-width: 768px) {
-  .heroTitle {
-    font-size: var(--yuanhhou-font-size-display-sm);
-  }
-
-  .heroSubtitle {
-    font-size: var(--yuanhhou-font-size-body-lg);
-  }
-}
-
-/* Content Area */
-.content {
-  display: flex;
-  flex-direction: column;
-  gap: var(--yuanhhou-spacing-300, 24px);
-}
-
-/* Hero Section
-   Styles for layout are provided by the reusable `Hero` component's
-   CSS module. Remove heading/paragraph overrides here to avoid
-   conflicting rules and let `Hero` control typography and spacing. */
-.hero {
-  margin-bottom: var(--yuanhhou-spacing-400, 40px);
-  display: flex;
-  flex-direction: row;
-  gap: var(--yuanhhou-spacing-300, 24px);
-  align-items: center;
   display: flex;
   flex-direction: column;
   gap: var(--yuanhhou-spacing-200, 16px);
-  margin-bottom: var(--yuanhhou-spacing-300, 24px);
-}
-
-.interactionLabel {
-  font-size: var(--yuanhhou-font-size-body-md);
-  color: var(--foreground-primary);
-  margin: 0 0 var(--yuanhhou-spacing-100, 8px) 0;
-}
-
-.toggleRow {
-  display: flex;
   align-items: center;
+  margin-bottom: var(--yuanhhou-spacing-300, 24px);
 }
 
 @media (max-width: 900px) {
   .hero {
-    flex-direction: column;
     text-align: center;
   }
 
   .heroLeft {
     order: 1;
   }
-
-  .heroRight {
-    order: 2;
-    margin-top: var(--yuanhhou-spacing-300, 24px);
-    width: 100%;
-  }
-}
-
-.placeholder {
-  background: var(--background-secondary);
-  border: 2px dashed var(--border-secondary);
-  border-radius: var(--radius-medium);
-  padding: var(--yuanhhou-spacing-400, 40px);
-  text-align: center;
-  color: var(--foreground-tertiary);
-  min-height: 300px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.placeholder p {
-  margin: 0;
-  font-size: var(--yuanhhou-font-size-body-lg);
 }
 
 /* ——— WORK VIEW ——— */
@@ -490,11 +381,105 @@ body {
   min-width: 0;
   box-sizing: border-box;
   display: flex;
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
 }
 
+/* ——— DECORATIVE CARD BACKGROUNDS ——— */
+/* Abstract geometric shapes using brand colours at low opacity.
+   Each card gets a unique composition via nth-child. */
+.workCards > article::before,
+.workCards > article::after {
+  content: '';
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Ensure card content sits above decorations */
 .workCards > article > div {
   width: 100%;
   height: 100%;
+  position: relative;
+  z-index: 1;
+}
+
+/* Card 1 — large soft circle, top-right + small accent bottom-left */
+.workCards > article:nth-child(1)::before {
+  width: 220px;
+  height: 220px;
+  top: -60px;
+  right: -40px;
+  background: var(--background-brand-primary);
+  opacity: 0.07;
+}
+.workCards > article:nth-child(1)::after {
+  width: 80px;
+  height: 80px;
+  bottom: 24px;
+  left: 24px;
+  background: var(--background-brand-secondary);
+  opacity: 0.12;
+}
+
+/* Card 2 — ring (hollow circle) bottom-left + small dot top-right */
+.workCards > article:nth-child(2)::before {
+  width: 180px;
+  height: 180px;
+  bottom: -50px;
+  left: -30px;
+  background: transparent;
+  border: 28px solid var(--background-brand-primary);
+  opacity: 0.06;
+}
+.workCards > article:nth-child(2)::after {
+  width: 48px;
+  height: 48px;
+  top: 20px;
+  right: 28px;
+  background: var(--background-brand-secondary);
+  opacity: 0.1;
+}
+
+/* Card 3 — two overlapping circles, centre-right */
+.workCards > article:nth-child(3)::before {
+  width: 160px;
+  height: 160px;
+  top: 50%;
+  right: -30px;
+  transform: translateY(-50%);
+  background: var(--background-brand-primary);
+  opacity: 0.06;
+}
+.workCards > article:nth-child(3)::after {
+  width: 100px;
+  height: 100px;
+  top: 50%;
+  right: 20px;
+  transform: translateY(-30%);
+  background: var(--background-brand-secondary);
+  opacity: 0.09;
+}
+
+/* Card 4 (bonus) — large ring top-left + dot bottom-right */
+.workCards > article:nth-child(4)::before {
+  width: 240px;
+  height: 240px;
+  top: -80px;
+  left: -60px;
+  background: transparent;
+  border: 32px solid var(--background-brand-secondary);
+  opacity: 0.08;
+}
+.workCards > article:nth-child(4)::after {
+  width: 64px;
+  height: 64px;
+  bottom: 20px;
+  right: 24px;
+  background: var(--background-brand-primary);
+  opacity: 0.08;
 }
 
 .cardBadge {
@@ -526,9 +511,10 @@ body {
   cursor: not-allowed;
 }
 
-@media (max-width: 1024px) {
+@media (max-width: 1200px) {
   .workCards > article {
-    flex: 0 0 calc(50% - 24px);
+    flex: 0 0 100%;
+    max-width: 100%;
   }
 }
 
@@ -539,11 +525,6 @@ body {
 
   .workCards {
     gap: var(--yuanhhou-spacing-300);
-  }
-
-  .workCards > article {
-    flex: 0 0 100%;
-    max-width: 100%;
   }
 }
 
@@ -584,6 +565,10 @@ body {
   color: var(--foreground-secondary);
   margin: 0;
   margin-top: var(--yuanhhou-spacing-100, 8px);
+}
+
+.toggleItem + .toggleItem {
+  margin-top: var(--yuanhhou-spacing-300, 24px);
 }
 
 /* ——— ONBOARDING DIALOG ——— */
@@ -650,4 +635,22 @@ body {
 .enhancedContrast .settingHint,
 .enhancedContrast .onboardingHint {
   opacity: 0.9;
+}
+
+/* ——— VIDEO DIALOG ——— */
+.videoDialog {
+  max-width: 840px;
+}
+
+.videoPlayer {
+  width: 100%;
+  border-radius: var(--radius-medium);
+  background: #000;
+  display: block;
+  max-height: 70vh;
+}
+
+.videoPlayer:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
 }

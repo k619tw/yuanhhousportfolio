@@ -99,7 +99,7 @@
   .title { text-align: left; }
   .subtitle { text-align: left; }
   .actions { text-align: left; }
-  .image, .video { object-position: center top; }
+  .image, .video { max-height: none; object-position: center top; }
 }
 
 /* Brand variant rounding */

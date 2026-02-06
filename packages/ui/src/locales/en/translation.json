@@ -165,7 +165,9 @@
       "themeHint": "Pick a theme that matches your mood",
       "accessibility": "Accessibility",
       "enhancedContrast": "Enhanced Contrast",
-      "enhancedContrastHint": "Increases text opacity and color contrast for better readability"
+      "enhancedContrastHint": "Increases text opacity and color contrast for better readability",
+      "reduceMotion": "Reduce Motion",
+      "reduceMotionHint": "Minimises animations, transitions, and auto-playing video"
     },
     "work": {
       "title": "Work",
@@ -213,7 +215,7 @@
     "title": "Interesting facts",
     "subtitle": "A few things you may want to know",
     "companies": {
-      "title": "Company & Products\nI have worked with"
+      "title": "Where I have\nmade impact"
     },
     "tools": {
       "label": "Creative tools I use"
