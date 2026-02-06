@@ -4,13 +4,18 @@
 
 .footer {
   width: 100%;
-  padding: var(--yuanhhou-spacing-400) var(--yuanhhou-spacing-300);
+  padding: var(--yuanhhou-spacing-400) var(--yuanhhou-spacing-500);
   margin-top: auto;
 }
 
+@media (max-width: 768px) {
+  .footer {
+    padding: var(--yuanhhou-spacing-400) 16px;
+  }
+}
+
 .container {
-  max-width: 1440px;
-  margin: 0 auto;
+  width: 100%;
   display: flex;
   align-items: center;
   justify-content: space-between;

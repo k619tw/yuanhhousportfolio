@@ -28,6 +28,7 @@
     "build": "npm run render:all && npm run poster:all"
   },
   "dependencies": {
+    "@phosphor-icons/react": "^2.1.10",
     "@remotion/cli": "4.0.296",
     "@remotion/transitions": "4.0.296",
     "react": "^18.0.0",

@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react'
 import { useTranslation } from 'react-i18next'
-import { List, X } from '@phosphor-icons/react'
+import { List, X, HouseLineIcon, UserIcon, BookIcon, GearSixIcon } from '@phosphor-icons/react'
 import { ChipGroup } from '../UIComponents/Chip'
 import { Dialog } from '../UIComponents/Dialog/Dialog'
 import { Button } from '../UIComponents/Button/Button'
@@ -156,38 +156,26 @@ export const Portfolio: React.FC = () => {
       <nav className={styles.navbar}>
         <div className={styles.navContainer}>
           <div className={styles.navInner}>
-            {/* Logo (tappable to return home) */}
+            {/* Logo */}
             <div className={styles.logo}>
-              <button
-                className={styles.logoButton}
-                onClick={() => { setCurrentView('home'); setIsMenuOpen(false); }}
-                aria-label={t('portfolio.logo')}
-              >
-                <span>{t('portfolio.logo')}</span>
-              </button>
+              <a href="#home" onClick={() => { setCurrentView('home'); setIsMenuOpen(false); }}>{t('portfolio.logo')}</a>
             </div>
 
             {/* Nav Links */}
             <ul id="primary-navigation" className={`${styles.navLinks} ${isMenuOpen ? styles.active : ''}`}>
-              {/* Theme Selector for mobile menu - at top */}
-              <li className={styles.mobileThemeSelector}>
-                <ThemeSelector />
+              <li>
+                <a href="#home" onClick={() => { setCurrentView('home'); setIsMenuOpen(false); }} aria-current={currentView === 'home' ? 'page' : undefined} className={currentView === 'home' ? styles.active : ''}><HouseLineIcon size={18} weight="duotone" aria-hidden="true" /> {t('portfolio.nav.home')}</a>
               </li>
               <li>
-                <a href="#about" onClick={() => { setCurrentView('about'); setIsMenuOpen(false); }} aria-current={currentView === 'about' ? 'page' : undefined} className={currentView === 'about' ? styles.active : ''}>{t('portfolio.nav.about')}</a>
+                <a href="#work" onClick={() => { setCurrentView('work'); setIsMenuOpen(false); }} aria-current={currentView === 'work' ? 'page' : undefined} className={currentView === 'work' ? styles.active : ''}><BookIcon size={18} weight="duotone" aria-hidden="true" /> {t('portfolio.nav.work')}</a>
               </li>
               <li>
-                <a href="#work" onClick={() => { setCurrentView('work'); setIsMenuOpen(false); }} aria-current={currentView === 'work' ? 'page' : undefined} className={currentView === 'work' ? styles.active : ''}>{t('portfolio.nav.work')}</a>
+                <a href="#about" onClick={() => { setCurrentView('about'); setIsMenuOpen(false); }} aria-current={currentView === 'about' ? 'page' : undefined} className={currentView === 'about' ? styles.active : ''}><UserIcon size={18} weight="duotone" aria-hidden="true" /> {t('portfolio.nav.about')}</a>
               </li>
               <li>
-                <a href="#settings" onClick={() => { setCurrentView('settings'); setIsMenuOpen(false); }} aria-current={currentView === 'settings' ? 'page' : undefined} className={currentView === 'settings' ? styles.active : ''}>{t('portfolio.nav.settings')}</a>
+                <a href="#settings" onClick={() => { setCurrentView('settings'); setIsMenuOpen(false); }} aria-current={currentView === 'settings' ? 'page' : undefined} className={currentView === 'settings' ? styles.active : ''}><GearSixIcon size={18} weight="duotone" aria-hidden="true" /> {t('portfolio.nav.settings')}</a>
               </li>
             </ul>
-
-            {/* Theme Selector for desktop - right side */}
-            <div className={styles.desktopThemeSelector}>
-              <ThemeSelector />
-            </div>
 
             {/* Hamburger Menu */}
             <button
@@ -210,21 +198,18 @@ export const Portfolio: React.FC = () => {
       <main id="main-content" className={styles.main}>
         {currentView === 'home' ? (
           <div className={styles.grid}>
-            <section className={styles.hero}>
-              <Hero
-                title={t('portfolio.hero.title')}
-                subtitle={t('portfolio.hero.subtitle')}
-                videoSrc={(heroVideos[theme][i18n.language] || heroVideos[theme].en).video}
-                videoPoster={(heroVideos[theme][i18n.language] || heroVideos[theme].en).poster}
-                videoAutoplay={!reduceMotion}
-                imageSrc={heroImg}
-                imageAlt={t('portfolio.hero.imageAlt')}
-                className={styles.heroLeft}
-                ctaLabel={t('portfolio.hero.cta') || 'View recent work'}
-                ctaHref="#work"
-                onCtaClick={() => { setCurrentView('work'); setIsMenuOpen(false); }}
-              />
-            </section>
+            <Hero
+              title={t('portfolio.hero.title')}
+              subtitle={t('portfolio.hero.subtitle')}
+              videoSrc={(heroVideos[theme][i18n.language] || heroVideos[theme].en).video}
+              videoPoster={(heroVideos[theme][i18n.language] || heroVideos[theme].en).poster}
+              videoAutoplay={!reduceMotion}
+              imageSrc={heroImg}
+              imageAlt={t('portfolio.hero.imageAlt')}
+              ctaLabel={t('portfolio.hero.cta') || 'View recent work'}
+              ctaHref="#work"
+              onCtaClick={() => { setCurrentView('work'); setIsMenuOpen(false); }}
+            />
 
             {/* Interesting Facts Section */}
             <InterestingFacts onSportyCTAClick={() => setShowVideoDialog(true)} />

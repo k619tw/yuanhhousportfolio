@@ -94,7 +94,7 @@
 /* For viewports 900px and below: place media above text */
 @media (max-width: 900px) {
   .hero { flex-direction: column; }
-  .media { order: -1; width: 100%; justify-content: flex-start; }
+  .media { order: -1; width: 100%; justify-content: center; }
   .text { order: 0; text-align: left; }
   .title { text-align: left; }
   .subtitle { text-align: left; }

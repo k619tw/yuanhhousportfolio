@@ -7,6 +7,7 @@ import {
   useCurrentFrame,
   useVideoConfig,
 } from 'remotion';
+import { PersonArmsSpreadIcon } from '@phosphor-icons/react';
 import { type ThemeName, type ThemeTokens, themes, fonts } from './tokens';
 
 /* ================================================================
@@ -69,7 +70,7 @@ type VideoText = {
 const TEXT: Record<LocaleName, VideoText> = {
   en: {
     buttons: ['Get started', 'Learn more', 'Cancel', 'Delete'],
-    badges: ['Success', 'Danger', 'Warning', 'Promote', 'Neutral'],
+    badges: ['Live', 'Error', 'Review', 'New', 'Beta'],
     cardTitle: 'Accessible Design',
     cardBody: 'WCAG compliant with ARIA labels, keyboard navigation, and semantic HTML.',
     toggleOn: 'True',
@@ -78,7 +79,7 @@ const TEXT: Record<LocaleName, VideoText> = {
   },
   ja: {
     buttons: ['はじめる', 'もっと見る', 'キャンセル', '削除'],
-    badges: ['成功', '危険', '警告', 'プロモート', 'ニュートラル'],
+    badges: ['公開', 'エラー', '確認', '新着', 'ベータ'],
     cardTitle: 'アクセシブルデザイン',
     cardBody: 'ARIAラベル、キーボード操作、セマンティックHTMLに対応したWCAG準拠設計。',
     toggleOn: 'オン',
@@ -87,7 +88,7 @@ const TEXT: Record<LocaleName, VideoText> = {
   },
   'zh-TW': {
     buttons: ['立即開始', '了解更多', '取消', '刪除'],
-    badges: ['成功', '危險', '警告', '推薦', '中性'],
+    badges: ['上線', '錯誤', '審核', '最新', '測試'],
     cardTitle: '無障礙設計',
     cardBody: '符合 WCAG 標準，支援 ARIA 標籤、鍵盤導航與語意化 HTML。',
     toggleOn: '開啟',
@@ -182,9 +183,9 @@ const FakeBadge: React.FC<{
     style={{
       backgroundColor: bg,
       color: fg,
-      padding: '10px 22px',
+      padding: '16px 34px',
       borderRadius: radius,
-      fontSize: 17,
+      fontSize: 22,
       fontWeight: 600,
       textTransform: 'uppercase',
       letterSpacing: 1,
@@ -219,11 +220,9 @@ const FakeCard: React.FC<{ t: ThemeTokens; sceneBg: string; title: string; body:
         alignItems: 'center',
         justifyContent: 'center',
         color: t.fgBrandOnPrimary,
-        fontSize: 30,
-        fontWeight: 700,
       }}
     >
-      A
+      <PersonArmsSpreadIcon size={36} weight="duotone" />
     </div>
     <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
       <div style={{ fontSize: 34, fontWeight: 600, color: t.fgPrimary, letterSpacing: -0.3 }}>
@@ -408,7 +407,7 @@ export const ComponentDemo: React.FC<ComponentDemoProps> = ({ theme, locale }) =
             { bg: t.dangerBg, fg: t.dangerFg },                   // alert
           ];
           return (
-            <div style={{ display: 'flex', flexDirection: 'column', gap: 18, alignItems: 'center' }}>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 28, alignItems: 'center' }}>
               {txt.buttons.map((label, i) => {
                 const vis = stagger(i);
                 const btn = btnStyles[i];
@@ -430,7 +429,7 @@ export const ComponentDemo: React.FC<ComponentDemoProps> = ({ theme, locale }) =
 
         {/* Scene 1 — Badges */}
         {si === 1 && (
-          <div style={{ display: 'flex', gap: 14, justifyContent: 'center', flexWrap: 'wrap' }}>
+          <div style={{ display: 'flex', gap: 18, justifyContent: 'center' }}>
             {[
               { label: txt.badges[0], bg: t.successBg, fg: t.successFg },
               { label: txt.badges[1], bg: t.dangerBg, fg: t.dangerFg },

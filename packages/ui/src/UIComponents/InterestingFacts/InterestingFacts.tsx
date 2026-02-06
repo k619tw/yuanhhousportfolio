@@ -116,18 +116,20 @@ export const InterestingFacts: React.FC<InterestingFactsProps> = ({
           {/* === MIDDLE SECTION (CSS Grid Layout) === */}
           <div className={styles.middleSection}>
             {/* Sporty Person Card */}
-            <article className={styles.sportyCard} aria-label={t('interestingFacts.sporty.title')}>
+            <article
+              className={styles.sportyCard}
+              role="button"
+              tabIndex={0}
+              onClick={onSportyCTAClick}
+              onKeyDown={(e) => { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); onSportyCTAClick?.(); } }}
+              aria-label={`${t('interestingFacts.sporty.cta')} - video will play`}
+            >
               <div className={styles.sportyContent}>
                 <h3 className={styles.cardTitleLeft}>{t('interestingFacts.sporty.title')}</h3>
-                <button
-                  type="button"
-                  className={styles.sportyCTA}
-                  onClick={onSportyCTAClick}
-                  aria-label={`${t('interestingFacts.sporty.cta')} - video will play`}
-                >
+                <span className={styles.sportyCTA}>
                   <span>{t('interestingFacts.sporty.cta')}</span>
                   <ArrowRight size={20} weight="bold" aria-hidden="true" />
-                </button>
+                </span>
               </div>
               <div className={styles.sportyIcon} aria-hidden="true">
                 <Basketball size={56} weight="duotone" />

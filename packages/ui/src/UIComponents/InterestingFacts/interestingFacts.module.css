@@ -315,6 +315,12 @@
   align-items: center;
   justify-content: space-between;
   padding: var(--yuanhhou-spacing-400);
+  cursor: pointer;
+}
+
+.sportyCard:focus-visible {
+  outline: 2px solid var(--border-focus);
+  outline-offset: 2px;
 }
 
 .sportyContent {
@@ -327,27 +333,12 @@
   display: inline-flex;
   align-items: center;
   gap: var(--yuanhhou-spacing-50);
-  background: none;
-  border: none;
-  padding: 0;
-  cursor: pointer;
   font-family: var(--yuanhhou-font-family-primary);
   font-size: 15px;
   font-weight: var(--yuanhhou-font-weight-600);
   line-height: 20px;
   letter-spacing: -0.4px;
   color: var(--foreground-brand-primary);
-  transition: opacity 0.2s ease;
-}
-
-.sportyCTA:hover {
-  opacity: 0.8;
-}
-
-.sportyCTA:focus-visible {
-  outline: 2px solid var(--border-focus);
-  outline-offset: 2px;
-  border-radius: var(--radius-small);
 }
 
 .sportyIcon {
