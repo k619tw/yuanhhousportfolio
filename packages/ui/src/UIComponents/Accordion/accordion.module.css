@@ -118,3 +118,12 @@
     transition: none;
   }
 }
+
+/* Compact mode reduces vertical padding for tighter lists */
+.compact .trigger {
+  padding: var(--yuanhhou-spacing-100) 0;
+}
+
+.compact .panel {
+  padding-bottom: var(--yuanhhou-spacing-150);
+}

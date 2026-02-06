@@ -221,9 +221,29 @@ body {
     padding: 0 var(--yuanhhou-spacing-200, 16px);
   }
 
+  .navLinks li + li {
+    margin-top: var(--yuanhhou-spacing-50, 4px);
+  }
+
   .navLinks li a {
-    padding: var(--yuanhhou-spacing-100, 8px) 0;
-    display: block;
+    padding: var(--yuanhhou-spacing-100, 8px) var(--yuanhhou-spacing-150, 12px);
+    display: flex;
+    align-items: center;
+    gap: var(--yuanhhou-spacing-50, 4px);
+    width: 100%;
+    color: var(--foreground-primary);
+    border-radius: 9999px;
+    box-sizing: border-box;
+  }
+
+  .navLinks li a:hover {
+    background: var(--background-brand-primary);
+    color: var(--foreground-brand-on-primary);
+  }
+
+  .navLinks li a.active {
+    background: var(--background-brand-primary);
+    color: var(--foreground-brand-on-primary);
   }
 
   .settings {

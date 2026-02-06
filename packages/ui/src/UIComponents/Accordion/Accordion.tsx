@@ -22,6 +22,8 @@ export interface AccordionProps {
   defaultOpen?: string[]
   /** Optional class name for the container */
   className?: string
+  /** Compact visual density for tighter spacing */
+  compact?: boolean
 }
 
 export const Accordion: React.FC<AccordionProps> = ({
@@ -29,6 +31,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   allowMultiple = false,
   defaultOpen = [],
   className = '',
+  compact = false,
 }) => {
   const [openItems, setOpenItems] = useState<Set<string>>(new Set(defaultOpen))
 
@@ -48,7 +51,7 @@ export const Accordion: React.FC<AccordionProps> = ({
   }
 
   return (
-    <div className={`${styles.accordion} ${className}`}>
+    <div className={`${styles.accordion} ${className} ${compact ? styles.compact : ''}`}>
       {items.map((item) => {
         const isOpen = openItems.has(item.id)
         return (
